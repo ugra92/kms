@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Symfony2PluginSettings">
+    <option name="directoryToWeb" value="kms/web" />
+    <option name="pluginEnabled" value="true" />
+    <option name="twigNamespaces">
+      <list>
+        <twig_namespace custom="true" namespaceType="ADD_PATH" path="kms/app/Resources/views" />
+        <twig_namespace custom="true" namespace="base" namespaceType="ADD_PATH" path="kms/web/Base" />
+        <twig_namespace custom="true" namespace="WebProfiler" namespaceType="ADD_PATH" path="kms/vendor/symfony/symfony/src/Symfony/Bundle/WebProfilerBundle/Resources/views" />
+        <twig_namespace custom="true" namespace="Twig" namespaceType="ADD_PATH" path="kms/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Resources/views" />
+      </list>
+    </option>
+  </component>
+</project>

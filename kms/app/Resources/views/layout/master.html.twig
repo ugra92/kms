@@ -1,12 +1,8 @@
 {% extends (':layout:master-blank.html.twig') %}
 {% block body %}
    {{ include ('layout/menu.html.twig') }}
-    <section id="main-content">
-        <section class="wrapper">
-            <section class="row">
+    <div id="page-wrapper">
                 {% block content %}
                 {% endblock %}
-            </section>
-        </section>
-    </section>
+     </div>
 {% endblock %}
