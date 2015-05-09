@@ -1,0 +1,90 @@
+{% extends ':layout:master.html.twig' %}
+{% block customStylesheet %}
+    <link rel="stylesheet" href="{{ asset('Dashboard/css/dashboard.css') }}">
+    {% endblock %}
+{% block content %}
+    <div class="col-sm-6">
+    <div class="white-panel pn">
+        <div class="white-header">
+        <h3>My Recent Articles</h3>
+    </div>
+        {% for article in user_articles %}
+            <div class="article-heading"><h5><a href="#">{{ article.heading }}</a> </h5></div>
+            <div class="article-content"><p>{{ article.content|slice(0,150) }}<a href="#">...</a></p></div>
+        {% endfor %}
+    </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="white-panel pn">
+            <div class="white-header">
+                <h3>Recent Comments</h3>
+            </div>
+            {% for comment in user_comments %}
+                <div class="article-heading"><h5><a href="#">{{ comment.articleId.heading }}</a> </h5></div>
+                <div class="article-content"><p>{{ comment.text }}<a href="#">  view comment</a></p></div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="white-panel pn">
+            <div class="white-header">
+                <h3>News Feed</h3>
+            </div>
+            {#{% for news in department_news %}#}
+                {#<div class="article-heading"><h5><a href="#">{{ news.articles.heading}}</a> </h5></div>#}
+                {#<div class="article-content"><p>{{  news.articles.content|slice(0,150) }}<a href="#">  view comment</a></p></div>#}
+                {#{% endfor %}#}
+        </div>
+    </div>
+
+    <div class="[ col-xs-12 col-sm-offset-1 col-sm-5 ]">
+        <div class="[ panel panel-default ] panel-google-plus">
+            <div class="dropdown">
+                    <span class="dropdown-toggle" type="button" data-toggle="dropdown">
+                        <span class="[ glyphicon glyphicon-chevron-down ]"></span>
+                    </span>
+                <ul class="dropdown-menu" role="menu">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <div class="panel-google-plus-tags">
+                <ul>
+                    <li>#Millennials</li>
+                    <li>#Generation</li>
+                </ul>
+            </div>
+            <div class="panel-heading">
+                <img class="[ img-circle pull-left ]" src="https://lh3.googleusercontent.com/-CxXg7_7ylq4/AAAAAAAAAAI/AAAAAAAAAQ8/LhCIKQC5Aq4/s46-c-k-no/photo.jpg" alt="Mouse0270" />
+                <h3>Robert McIntosh</h3>
+                <h5><span>Shared publicly</span> - <span>Jun 27, 2014</span> </h5>
+            </div>
+            <div class="panel-body">
+                <p>Do people born in 2000 get to choose if they are Generation Y or Generation Z? How do you decide what generation you want to belong to?</p>
+            </div>
+            <div class="panel-footer">
+                <button type="button" class="[ btn btn-default ]">+1</button>
+                <button type="button" class="[ btn btn-default ]">
+                    <span class="[ glyphicon glyphicon-share-alt ]"></span>
+                </button>
+                <div class="input-placeholder">Add a comment...</div>
+            </div>
+            <div class="panel-google-plus-comment">
+                <img class="img-circle" src="https://lh3.googleusercontent.com/uFp_tsTJboUY7kue5XAsGA=s46" alt="User Image" />
+                <div class="panel-google-plus-textarea">
+                    <textarea rows="4"></textarea>
+                    <button type="submit" class="[ btn btn-success disabled ]">Post comment</button>
+                    <button type="reset" class="[ btn btn-default ]">Cancel</button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block customScripts %}
+    <script src="{{ asset('Dashboard/js/posts.js') }}"></script>
+{% endblock %}
+
