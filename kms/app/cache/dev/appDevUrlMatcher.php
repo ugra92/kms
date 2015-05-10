@@ -127,6 +127,41 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        if (0 === strpos($pathinfo, '/articles')) {
+            // article-main
+            if ($pathinfo === '/articles') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_articlemain;
+                }
+
+                return array (  '_controller' => 'AppBundle\\Controller\\ArticleController::indexAction',  '_route' => 'article-main',);
+            }
+            not_articlemain:
+
+            // article-add
+            if ($pathinfo === '/articles') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_articleadd;
+                }
+
+                return array (  '_controller' => 'AppBundle\\Controller\\ArticleController::articleAddNewAction',  '_route' => 'article-add',);
+            }
+            not_articleadd:
+
+        }
+
+        // category_main
+        if ($pathinfo === '/category') {
+            return array (  '_controller' => 'AppBundle\\Controller\\CategoryController::indexAction',  '_route' => 'category_main',);
+        }
+
+        // ajax_all_categories
+        if ($pathinfo === '/api/categoryAll') {
+            return array (  '_controller' => 'AppBundle\\Controller\\CategoryController::returnCategoriesAjaxAction',  '_route' => 'ajax_all_categories',);
+        }
+
         // homepage
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {

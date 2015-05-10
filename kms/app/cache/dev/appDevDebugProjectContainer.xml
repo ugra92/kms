@@ -3032,7 +3032,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>554e2326731e3</argument>
+            <argument>554f9b49d95d6</argument>
           </service>
         </argument>
       </argument>
@@ -3123,7 +3123,7 @@
       <argument type="service" id="router"/>
       <call method="registerListener">
         <argument>main</argument>
-        <argument>/logout</argument>
+        <argument>fos_user_security_logout</argument>
         <argument>logout</argument>
         <argument>_csrf_token</argument>
         <argument>null</argument>
@@ -3249,13 +3249,13 @@
                     <argument type="service" id="router" on-invalid="null"/>
                   </service>
                 </argument>
-                <argument>/</argument>
+                <argument>homepage</argument>
               </service>
             </argument>
             <argument type="collection">
               <argument key="csrf_parameter">_csrf_token</argument>
               <argument key="intention">logout</argument>
-              <argument key="logout_path">/logout</argument>
+              <argument key="logout_path">fos_user_security_logout</argument>
             </argument>
             <call method="addHandler">
               <argument type="service">
@@ -3339,7 +3339,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>554e2326731e3</argument>
+            <argument>554f9b49d95d6</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>

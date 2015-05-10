@@ -231,7 +231,15 @@ class User extends BaseUser{
     }
 
 
+    public function serialize()
+    {
+        return serialize($this->username);
+    }
 
+    public function unserialize($data)
+    {
+        $this->username = unserialize($data);
+    }
 
 
 }

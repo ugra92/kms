@@ -30,7 +30,7 @@ class Article {
      */
     protected $content;
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     protected $createdAt;
 
@@ -163,5 +163,17 @@ class Article {
         $this->comments = $comments;
     }
 
+    /**
+     * Now we tell doctrine that before we persist or update we call the updatedTimestamps() function.
+     *
+     * @ORM\PrePersist
+     */
+    public function updatedTimestamps()
+    {
+        if($this->getCreatedAt() == null)
+        {
+            $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+        }
+    }
 
 }

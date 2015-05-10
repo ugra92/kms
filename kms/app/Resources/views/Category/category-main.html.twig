@@ -1,0 +1,41 @@
+{% extends ':layout:master.html.twig' %}
+{% block customStylesheet %}
+
+{% endblock %}
+{% block content %}
+    <section id="category-add" class="clearfix">
+        <h3>Add category</h3>
+        <div class="col-sm-3">
+            <div class="row">
+                {{ form_start(form) }}
+                <div class="form-group col-sm-12">
+                    {{ form_row (form.category_name) }}
+                </div>
+                <div class="form-group col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            {{ form_row(form.save) }}
+                        </div>
+
+                    </div>
+                </div>
+                {{ form_end(form) }}
+                <div class="col-sm-6">
+                    <button class="btn btn-info" id="get_categories">See existing categories</button>
+                </div>
+            </div>
+            <div id="ajax">
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block customScripts %}
+    <script>
+        $('#get_categories').on('click', function(){
+            $.get('{{path('ajax_all_categories')}}', function(data){
+                console.log(data);
+            });
+        });
+    </script>
+{% endblock %}
