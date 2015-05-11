@@ -17,6 +17,8 @@ class SecuredController extends Controller
     /**
      * @Route("/login", name="_demo_login")
      * @Template()
+     * @param Request $request
+     * @return array
      */
     public function loginAction(Request $request)
     {

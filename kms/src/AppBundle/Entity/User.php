@@ -13,7 +13,7 @@ class User extends BaseUser{
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $userId;
+    protected $id;
 //    /**
 //     * @ORM\Column(type="string")
 //     */
@@ -65,9 +65,9 @@ class User extends BaseUser{
     /**
      * @return mixed
      */
-    public function getUserId()
+    public function getId()
     {
-        return $this->userId;
+        return $this->id;
     }
 
     /**

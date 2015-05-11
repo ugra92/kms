@@ -26,7 +26,7 @@ class Document {
     protected $url;
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="documents")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="userId")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $userId;
 

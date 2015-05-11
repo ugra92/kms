@@ -36,7 +36,7 @@ class Article {
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="articles")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="userId")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $userId;
 
