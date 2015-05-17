@@ -256,9 +256,11 @@
                     </ul>
                     <!-- /.nav-second-level -->
                 </li>
-                <li>
-                    <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
-                </li>
+                {% if is_granted("ROLE_ADMIN") %}
+                    <li>
+                        <a href="tables.html"><i class="fa fa-table fa-fw"></i> Department Manager</a>
+                    </li>
+                {% endif %}
                 <li>
                     <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
                 </li>

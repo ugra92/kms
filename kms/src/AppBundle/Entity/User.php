@@ -35,7 +35,10 @@ class User extends BaseUser{
 //     * @ORM\Column(type="string")
 //     */
 //    protected $role;
-
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $name;
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Department", inversedBy="employees")
      * @ORM\JoinColumn(name="department_id", referencedColumnName="departmentId")
@@ -231,6 +234,22 @@ class User extends BaseUser{
     public function setComments($comments)
     {
         $this->comments = $comments;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
 }

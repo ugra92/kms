@@ -157,11 +157,6 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'AppBundle\\Controller\\CategoryController::indexAction',  '_route' => 'category_main',);
         }
 
-        // ajax_all_categories
-        if ($pathinfo === '/api/categoryAll') {
-            return array (  '_controller' => 'AppBundle\\Controller\\CategoryController::returnCategoriesAjaxAction',  '_route' => 'ajax_all_categories',);
-        }
-
         // homepage
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
@@ -169,6 +164,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
 
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
+        }
+
+        // department-main
+        if ($pathinfo === '/admin/department') {
+            return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::indexAction',  '_route' => 'department-main',);
         }
 
         if (0 === strpos($pathinfo, '/log')) {
