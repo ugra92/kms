@@ -40,23 +40,19 @@ class __TwigTemplate_46fe789f6aeadf773e143b5dd2aaec31b234b33dcbc70312eb1f3a9faa3
         echo "   ";
         echo twig_include($this->env, $context, "layout/menu.html.twig");
         echo "
-    <section id=\"main-content\">
-        <section class=\"wrapper\">
-            <section class=\"row\">
+    <div id=\"page-wrapper\" class=\"clearfix\">
                 ";
-        // line 7
+        // line 5
         $this->displayBlock('content', $context, $blocks);
-        // line 9
-        echo "            </section>
-        </section>
-    </section>
+        // line 7
+        echo "     </div>
 ";
     }
 
-    // line 7
+    // line 5
     public function block_content($context, array $blocks = array())
     {
-        // line 8
+        // line 6
         echo "                ";
     }
 
@@ -72,6 +68,6 @@ class __TwigTemplate_46fe789f6aeadf773e143b5dd2aaec31b234b33dcbc70312eb1f3a9faa3
 
     public function getDebugInfo()
     {
-        return array (  60 => 8,  57 => 7,  50 => 9,  48 => 7,  40 => 3,  37 => 2,  11 => 1,);
+        return array (  56 => 6,  53 => 5,  48 => 7,  46 => 5,  40 => 3,  37 => 2,  11 => 1,);
     }
 }

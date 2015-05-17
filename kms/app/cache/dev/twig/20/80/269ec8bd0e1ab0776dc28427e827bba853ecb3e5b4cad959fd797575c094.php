@@ -78,18 +78,20 @@ class __TwigTemplate_2080269ec8bd0e1ab0776dc28427e827bba853ecb3e5b4cad959fd79757
         <div class=\"white-panel pn\">
             <div class=\"white-header\">
                 <h3>Recent Comments</h3>
+
+
             </div>
             ";
-        // line 22
+        // line 24
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["user_comments"]) ? $context["user_comments"] : $this->getContext($context, "user_comments")));
         foreach ($context['_seq'] as $context["_key"] => $context["comment"]) {
-            // line 23
+            // line 25
             echo "                <div class=\"article-heading\"><h5><a href=\"#\">";
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["comment"], "articleId", array()), "heading", array()), "html", null, true);
             echo "</a> </h5></div>
                 <div class=\"article-content\"><p>";
-            // line 24
+            // line 26
             echo twig_escape_filter($this->env, $this->getAttribute($context["comment"], "text", array()), "html", null, true);
             echo "<a href=\"#\">  view comment</a></p></div>
             ";
@@ -97,7 +99,7 @@ class __TwigTemplate_2080269ec8bd0e1ab0776dc28427e827bba853ecb3e5b4cad959fd79757
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['comment'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 26
+        // line 28
         echo "        </div>
     </div>
     <div class=\"col-sm-12\">
@@ -106,13 +108,13 @@ class __TwigTemplate_2080269ec8bd0e1ab0776dc28427e827bba853ecb3e5b4cad959fd79757
                 <h3>News Feed</h3>
             </div>
             ";
-        // line 34
-        echo "                ";
-        // line 35
-        echo "                ";
         // line 36
         echo "                ";
         // line 37
+        echo "                ";
+        // line 38
+        echo "                ";
+        // line 39
         echo "        </div>
     </div>
 
@@ -165,10 +167,10 @@ class __TwigTemplate_2080269ec8bd0e1ab0776dc28427e827bba853ecb3e5b4cad959fd79757
 ";
     }
 
-    // line 87
+    // line 89
     public function block_customScripts($context, array $blocks = array())
     {
-        // line 88
+        // line 90
         echo "    <script src=\"";
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Dashboard/js/posts.js"), "html", null, true);
         echo "\"></script>
@@ -187,6 +189,6 @@ class __TwigTemplate_2080269ec8bd0e1ab0776dc28427e827bba853ecb3e5b4cad959fd79757
 
     public function getDebugInfo()
     {
-        return array (  172 => 88,  169 => 87,  116 => 37,  114 => 36,  112 => 35,  110 => 34,  101 => 26,  93 => 24,  88 => 23,  84 => 22,  75 => 15,  67 => 13,  62 => 12,  58 => 11,  51 => 6,  48 => 5,  41 => 3,  38 => 2,  11 => 1,);
+        return array (  174 => 90,  171 => 89,  118 => 39,  116 => 38,  114 => 37,  112 => 36,  103 => 28,  95 => 26,  90 => 25,  86 => 24,  75 => 15,  67 => 13,  62 => 12,  58 => 11,  51 => 6,  48 => 5,  41 => 3,  38 => 2,  11 => 1,);
     }
 }

@@ -1,5 +1,6 @@
 <?php
 namespace AppBundle\Entity;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 
@@ -59,7 +60,9 @@ class User extends BaseUser{
     public function __construct()
     {
         parent::__construct();
-        // your own logic
+        $this->comments= new ArrayCollection();
+        $this->documents= new ArrayCollection();
+        $this->articles= new ArrayCollection();
     }
 
     /**
@@ -229,17 +232,5 @@ class User extends BaseUser{
     {
         $this->comments = $comments;
     }
-
-
-    public function serialize()
-    {
-        return serialize($this->username);
-    }
-
-    public function unserialize($data)
-    {
-        $this->username = unserialize($data);
-    }
-
 
 }
