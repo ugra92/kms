@@ -30,4 +30,60 @@ class Document {
      */
     protected $userId;
 
+
+    /**
+     * Get documentId
+     *
+     * @return integer 
+     */
+    public function getDocumentId()
+    {
+        return $this->documentId;
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return Document
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string 
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set userId
+     *
+     * @param \AppBundle\Entity\User $userId
+     * @return Document
+     */
+    public function setUserId(\AppBundle\Entity\User $userId = null)
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    /**
+     * Get userId
+     *
+     * @return \AppBundle\Entity\User 
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
 }

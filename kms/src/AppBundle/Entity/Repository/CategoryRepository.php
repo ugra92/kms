@@ -7,7 +7,7 @@ use Doctrine\ORM\EntityRepository;
 
 class CategoryRepository extends EntityRepository
 {
-    public function findById($id)
+    public function findByPk($id)
     {
        return $this->findOneByCategoryId($id);
     }

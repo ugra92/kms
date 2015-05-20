@@ -38,15 +38,11 @@ class ArticleController extends Controller
         // get heading and content from $_POST
         $article->setHeading($request->request->get('article')['heading']);
         $article->setContent($request->request->get('article')['content']);
-        //find category and set category
-        $categoryId= $request->request->get('category');
-        $category = $this->get('category_repository')->findById($categoryId);
-        $article->setCategoryId($category);
-        //set user
         $article->setUserId($this->getUser());
-        //insert current date time
-        $article->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
-       $this->get('article_repository')->save($article);
+        $categoryId= (int)$request->request->get('category');
+
+        $this->get('article_manager')->save($article, $categoryId);
+
         return $this->redirectToRoute('article-main', array('response'=>'Succesfuly added article'));
     }
 

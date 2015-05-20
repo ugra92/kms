@@ -22,71 +22,59 @@ class __TwigTemplate_502b0c355e7bd11b8bc8d3b33ea1b9f66cf63f34db9f8d50909613d8952
         echo "<html>
 <head>
     <title>Knowledge Management System</title>
-    <link rel=\"stylesheet\" href=\"";
-        // line 4
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Base/css/bootstrap.min.css"), "html", null, true);
-        echo "\">
-    <link rel=\"stylesheet\" href=\"";
-        // line 5
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Base/css/bootstrap-theme.css"), "html", null, true);
-        echo "\">
-    <link rel=\"stylesheet\" href=\"";
-        // line 6
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Base/css/metisMenu.css"), "html", null, true);
-        echo "\">
-    <link rel=\"stylesheet\" href=\"";
-        // line 7
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Base/css/style.css"), "html", null, true);
-        echo "\">
-    <link href=\"http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css\" rel=\"stylesheet\">
 
     ";
-        // line 10
+        // line 5
+        $this->env->loadTemplate("layout/stylesheets.html.twig")->display($context);
+        // line 6
+        echo "
+    ";
+        // line 7
         $this->displayBlock('customStylesheet', $context, $blocks);
-        // line 12
+        // line 9
         echo "</head>
 <body>
 ";
-        // line 14
+        // line 11
         $this->displayBlock('body', $context, $blocks);
-        // line 16
+        // line 13
         echo "</body>
 <script src=\"";
-        // line 17
+        // line 14
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Base/js/jquery-2.1.3.js"), "html", null, true);
         echo "\"></script>
 <script src=\"";
-        // line 18
+        // line 15
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Base/js/bootstrap.min.js"), "html", null, true);
         echo "\"></script>
 <script src=\"";
-        // line 19
+        // line 16
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Base/js/sb-admin-2.js"), "html", null, true);
         echo "\"></script>
 <script src=\"";
-        // line 20
+        // line 17
         echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Base/js/metisMenu.js"), "html", null, true);
         echo "\"></script>
 ";
-        // line 21
+        // line 18
         $this->displayBlock('customScripts', $context, $blocks);
-        // line 23
+        // line 20
         echo "</html>";
     }
 
-    // line 10
+    // line 7
     public function block_customStylesheet($context, array $blocks = array())
     {
-        // line 11
+        // line 8
         echo "    ";
     }
 
-    // line 14
+    // line 11
     public function block_body($context, array $blocks = array())
     {
     }
 
-    // line 21
+    // line 18
     public function block_customScripts($context, array $blocks = array())
     {
     }
@@ -103,6 +91,6 @@ class __TwigTemplate_502b0c355e7bd11b8bc8d3b33ea1b9f66cf63f34db9f8d50909613d8952
 
     public function getDebugInfo()
     {
-        return array (  90 => 21,  85 => 14,  81 => 11,  78 => 10,  74 => 23,  72 => 21,  68 => 20,  64 => 19,  60 => 18,  56 => 17,  53 => 16,  51 => 14,  47 => 12,  45 => 10,  39 => 7,  35 => 6,  31 => 5,  27 => 4,  22 => 1,);
+        return array (  78 => 18,  73 => 11,  69 => 8,  66 => 7,  62 => 20,  60 => 18,  56 => 17,  52 => 16,  48 => 15,  44 => 14,  41 => 13,  39 => 11,  35 => 9,  33 => 7,  30 => 6,  28 => 5,  22 => 1,);
     }
 }

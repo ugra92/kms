@@ -67,4 +67,44 @@ class Department{
         return $this->groupId;
     }
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->employees = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get departmentId
+     *
+     * @return integer 
+     */
+    public function getDepartmentId()
+    {
+        return $this->departmentId;
+    }
+
+    /**
+     * Add employees
+     *
+     * @param \AppBundle\Entity\User $employees
+     * @return Department
+     */
+    public function addEmployee(\AppBundle\Entity\User $employees)
+    {
+        $this->employees[] = $employees;
+
+        return $this;
+    }
+
+    /**
+     * Remove employees
+     *
+     * @param \AppBundle\Entity\User $employees
+     */
+    public function removeEmployee(\AppBundle\Entity\User $employees)
+    {
+        $this->employees->removeElement($employees);
+    }
 }

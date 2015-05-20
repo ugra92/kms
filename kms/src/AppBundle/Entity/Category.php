@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 use AppBundle\Entity\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\CategoryRepository")
@@ -30,14 +31,12 @@ class Category {
      */
     protected $articles;
 
-    /**
-     * @param $name
-     */
-    function __construct($name)
+    function __construct()
     {
-        $this->name= $name;
+        $this->articles= new ArrayCollection();
     }
 
+    
 
     /**
      * @return mixed
@@ -93,4 +92,27 @@ class Category {
     }
 
 
+
+    /**
+     * Add articles
+     *
+     * @param \AppBundle\Entity\Article $articles
+     * @return Category
+     */
+    public function addArticle(\AppBundle\Entity\Article $articles)
+    {
+        $this->articles[] = $articles;
+        $articles->setCategoryId($this);
+        return $this;
+    }
+
+    /**
+     * Remove articles
+     *
+     * @param \AppBundle\Entity\Article $articles
+     */
+    public function removeArticle(\AppBundle\Entity\Article $articles)
+    {
+        $this->articles->removeElement($articles);
+    }
 }
