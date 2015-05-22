@@ -11,7 +11,7 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('heading', 'text', array('attr'=>array('class'=>'form-control')))
-            ->add('content', 'textarea', array('attr'=>array('class'=>'form-control textarea-reset', 'rows'=>'20')))
+            ->add('content', 'textarea', array('attr'=>array('class'=>'form-control textarea-reset jqtext', 'rows'=>'20')))
             ->add('save', 'submit', array('attr'=>array('class'=>'btn btn-success')));
     }
 

@@ -1,3 +1,10 @@
 .textarea-reset{
- resize: none;
+    resize: none;
+}
+.codeSnippets{
+    background: #2E3B46;
+    padding: 2px 15px;
+    color: #FFF;
+    border-radius: 5px;
+    cursor: pointer;
 }

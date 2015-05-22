@@ -1,11 +1,42 @@
 {% extends ':layout:master.html.twig' %}
 {% block customStylesheet %}
     <link rel="stylesheet" href="{{ asset('Article/articleBase.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('Article/plugin/textEditor/jquery-te-1.4.0.css') }}"/>
 {% endblock %}
 
 {% block content %}
     <section id="article-add">
-        <div class="col-sm-10 col-sm-offset-1">
+        <div class="col-md-2">
+            <h2>Settings</h2>
+            <h5>Insert Code Snippets</h5>
+            <div class="form-group">
+                <label for="css" class="codeSnippets">Css</label>
+            </div>
+            <div class="form-group">
+                <label for="php" class="codeSnippets">Php</label>
+            </div>
+            <div class="form-group">
+                <label for="javascript" class="codeSnippets">JS</label>
+            </div>
+            <h5>Privacy Settings</h5>
+            <div class="form-group">
+                <input type="radio" name="privacy" id="Public"/>
+                <label for="Public" class="">Public</label>
+            </div>
+            <div class="form-group">
+                <input type="radio" name="privacy" id="Internal"/>
+                <label for="Internal" class="">Internal</label>
+
+            </div>
+            <div class="form-group">
+                <input type="radio" name="privacy" id="Custom"/>
+                <label for="customPrivacy" class="">Custom</label><br/>
+                <select name="customPrivacy" id="customPrivacy" multiple>
+
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-9">
             <h2>Add new article</h2>
             {{ form_start(form) }}
             <div class="form-group">
@@ -24,12 +55,30 @@
             </div>
             {{ form_end(form) }}
             {% if response is defined %}
-
+                {{ response }}
             {% endif %}
         </div>
     </section>
 {% endblock %}
 
 {% block customScripts %}
+    <script src="{{ asset('Article/plugin/textEditor/jquery-te-1.4.0.min.js') }}"></script>
+    <script>
+        $('.jqtext').jqte();
+        // settings of status
+        var jqteStatus = true;
+        $(".status").click(function()
+        {
+            jqteStatus = jqteStatus ? false : true;
+            $('.jqtext').jqte({"status" : jqteStatus})
+        });
 
+
+        //Insert tags for code preview
+        $('.codeSnippets').on('click', function(){
+            language= $(this).attr('for');
+            $('.jqte_editor').append('<br>&lt;'+language+'&gt;<br> Insert your code here <br>&lt;/'+language+'&gt;');
+
+        });
+    </script>
 {% endblock %}

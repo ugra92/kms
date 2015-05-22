@@ -166,9 +166,23 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
         }
 
-        // department-main
-        if ($pathinfo === '/admin/department') {
-            return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::indexAction',  '_route' => 'department-main',);
+        if (0 === strpos($pathinfo, '/admin/department')) {
+            // department-main
+            if ($pathinfo === '/admin/department') {
+                return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::indexAction',  '_route' => 'department-main',);
+            }
+
+            // department-add
+            if ($pathinfo === '/admin/department/new') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_departmentadd;
+                }
+
+                return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::departmentAddNewAction',  '_route' => 'department-add',);
+            }
+            not_departmentadd:
+
         }
 
         if (0 === strpos($pathinfo, '/log')) {

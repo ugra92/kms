@@ -14,4 +14,8 @@ use AppBundle\Entity\Repository\CategoryRepository;
      public function getCategoryById($id){
         return $this->repository->findByPk($id);
      }
+
+     public function save($category){
+         $this->repository->save($category);
+     }
  }

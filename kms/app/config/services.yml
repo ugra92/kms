@@ -20,6 +20,18 @@ services:
                factory_method: getRepository
                arguments: [AppBundle\Entity\Article]
 
+     user_repository:
+                    class: AppBundle\Entity\Repository\UserRepository
+                    factory_service: doctrine.orm.default_entity_manager
+                    factory_method: getRepository
+                    arguments: [AppBundle\Entity\User]
+
+     department_repository:
+                    class: AppBundle\Entity\Repository\DepartmentRepository
+                    factory_service: doctrine.orm.default_entity_manager
+                    factory_method: getRepository
+                    arguments: [AppBundle\Entity\Department]
+
      category_manager:
                class: AppBundle\Entity\Manager\CategoryManager
                arguments: ['@category_repository']
@@ -28,3 +40,6 @@ services:
                 class: AppBundle\Entity\Manager\ArticleManager
                 arguments: ['@article_repository', '@category_manager']
 
+     department_manager:
+                     class: AppBundle\Entity\Manager\DepartmentManager
+                     arguments: ['@department_repository']

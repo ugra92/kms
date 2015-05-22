@@ -4,7 +4,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\DepartmentRepository")
  *
  */
 class Department{
@@ -91,10 +91,10 @@ class Department{
      * @param \AppBundle\Entity\User $employees
      * @return Department
      */
-    public function addEmployee(\AppBundle\Entity\User $employees)
+    public function addEmployee(User $employees)
     {
         $this->employees[] = $employees;
-
+        $employees->setDepartmentId($this);
         return $this;
     }
 
@@ -103,7 +103,7 @@ class Department{
      *
      * @param \AppBundle\Entity\User $employees
      */
-    public function removeEmployee(\AppBundle\Entity\User $employees)
+    public function removeEmployee(User $employees)
     {
         $this->employees->removeElement($employees);
     }

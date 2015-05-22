@@ -5,14 +5,15 @@
 
 {% block content %}
     <section id="department">
-        <form action="" method="post" class="col-sm-4">
+
+        <form action="{{ path('department-add') }}" method="post" class="col-sm-4">
             <div class="form-group ">
                 <label for="department">Department name</label>
-                <input type="text" class="form-control" id="department"/>
+                <input type="text" class="form-control" id="department" name="department_name"/>
             </div>
             <div class="form-group">
                 <label for="users">Choose users for department(hold ctrl for multiple select)</label>
-                <select class="form-control" name="users" id="users" multiple>
+                <select class="form-control" name="users[]" id="users" multiple>
                     {% for user in users %}
                     <option value="{{ user.getId }}">{{ user.getName }}</option>
                     {% endfor %}
@@ -22,6 +23,7 @@
                 <button class="btn btn-success" type="submit">Save</button>
             </div>
         </form>
+
     </section>
 {% endblock %}
 

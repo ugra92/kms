@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 class ArticleController extends Controller
@@ -43,7 +44,8 @@ class ArticleController extends Controller
 
         $this->get('article_manager')->save($article, $categoryId);
 
-        return $this->redirectToRoute('article-main', array('response'=>'Succesfuly added article'));
+        return new Response('Created article '.$article->getHeading());
+     //   return $this->redirectToRoute('article-main', array('response'=>'Succesfuly added article'));
     }
 
 }

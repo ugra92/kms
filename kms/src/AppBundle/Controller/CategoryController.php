@@ -22,8 +22,9 @@ class CategoryController extends Controller
         $form = $this->createForm(new CategoryType());
         $form->handleRequest($request);
         if($form->isValid()){
-            $category = new Category($form['category_name']->getData());
-            $this->get('category_repository')->save($category);
+            $category = new Category();
+            $category->setName($form['category_name']->getData());
+            $this->get('category_manager')->save($category);
         }
         return $this->render('Category/category-main.html.twig', array('form'=>$form->createView()));
     }
