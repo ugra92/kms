@@ -6,38 +6,49 @@
 
 {% block content %}
     <section id="article-add">
-        <div class="col-md-2">
-            <h2>Settings</h2>
-            <h5>Insert Code Snippets</h5>
-            <div class="form-group">
-                <label for="css" class="codeSnippets">Css</label>
-            </div>
-            <div class="form-group">
-                <label for="php" class="codeSnippets">Php</label>
-            </div>
-            <div class="form-group">
-                <label for="javascript" class="codeSnippets">JS</label>
-            </div>
-            <h5>Privacy Settings</h5>
-            <div class="form-group">
-                <input type="radio" name="privacy" id="Public"/>
-                <label for="Public" class="">Public</label>
-            </div>
-            <div class="form-group">
-                <input type="radio" name="privacy" id="Internal"/>
-                <label for="Internal" class="">Internal</label>
-
-            </div>
-            <div class="form-group">
-                <input type="radio" name="privacy" id="Custom"/>
-                <label for="customPrivacy" class="">Custom</label><br/>
-                <select name="customPrivacy" id="customPrivacy" multiple>
-
-                </select>
+        <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa-file-text-o"></i> Articles</h3>
+            <ol class="breadcrumb">
+                <li><i class="fa fa-file-text-o"></i><a href="index.html">Articles</a></li>
+                <li><i class="fa fa-plus"></i>Add New</li>
+            </ol>
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p>Settings</p>
+                </div>
+                <div class="panel-body">
+                    <div class="portlets">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="pull-left">Insert Code Snippets</div>
+                                <div class="widget-icons pull-right">
+                                    <a href="#" class="wminimize"><i class="fa fa-chevron-up"></i></a>
+                                    <a href="#" class="wclose"><i class="fa fa-times"></i></a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="css" class="codeSnippets">Css</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="php" class="codeSnippets">Php</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="javascript" class="codeSnippets">JS</label>
+                                </div>
+                                <div class="widget-foot">
+                                    <!-- Footer goes here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-sm-9">
-            <h2>Add new article</h2>
             {{ form_start(form) }}
             <div class="form-group">
                 {{ form_row(form.heading) }}
@@ -52,6 +63,12 @@
                         <option value="{{ category.getCategoryId }}">{{ category.getName }}</option>
                     {% endfor %}
                 </select>
+            </div>
+            <div class="form-group">
+                {{ form_row(form.tags) }}
+            </div>
+            <div class="form-group">
+                {{ form_row(form.privacy) }}
             </div>
             {{ form_end(form) }}
             {% if response is defined %}
@@ -72,7 +89,6 @@
             jqteStatus = jqteStatus ? false : true;
             $('.jqtext').jqte({"status" : jqteStatus})
         });
-
 
         //Insert tags for code preview
         $('.codeSnippets').on('click', function(){

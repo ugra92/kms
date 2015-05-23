@@ -29,6 +29,18 @@ class Article {
      * @ORM\Column(type="string", length=999999)
      */
     protected $content;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $tags;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $private;
+
+
     /**
      * @ORM\Column(type="datetime")
      */
@@ -102,6 +114,24 @@ class Article {
     /**
      * @return mixed
      */
+    public function getPrivate()
+    {
+        return $this->private;
+    }
+
+    /**
+     * @param mixed $private
+     */
+    public function setPrivate($private)
+    {
+        $this->private = $private;
+    }
+
+
+
+    /**
+     * @return mixed
+     */
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -161,6 +191,22 @@ class Article {
     public function setComments($comments)
     {
         $this->comments = $comments;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param mixed $tags
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
     }
 
     /**

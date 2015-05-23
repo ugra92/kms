@@ -7,13 +7,12 @@ use AppBundle\Form\Type\ArticleType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 class ArticleController extends Controller
 {
+
     /**
      * @Route("/articles", name="article-main")
      * @return string|\Symfony\Component\HttpFoundation\Response
@@ -21,13 +20,37 @@ class ArticleController extends Controller
      */
     public function indexAction()
     {
+
+        return $this->render('Article/article-all.html.twig');
+    }
+
+
+    /**
+     * @Route("/article/add", name="article-add")
+     * @return string|\Symfony\Component\HttpFoundation\Response
+     * @Method("GET")
+     */
+    public function addNewAction()
+    {
         $form = $this->createForm(new ArticleType());
         $categories= $this->get('category_repository')->findAll();
         return $this->render('Article/article-main.html.twig', array('form'=>$form->createView(), 'categories'=>$categories));
     }
 
     /**
-     * @Route("/articles", name="article-add")
+     * @Route("/article/edit", name="article-edit")
+     * @return string|\Symfony\Component\HttpFoundation\Response
+     * @Method("GET")
+     */
+    public function editAction()
+    {
+        $form = $this->createForm(new ArticleType());
+        $categories= $this->get('category_repository')->findAll();
+        return $this->render('Article/article-edit.html.twig', array('form'=>$form->createView(), 'categories'=>$categories));
+    }
+
+    /**
+     * @Route("/article/add", name="article-add-post")
      * @param Request $request
      * @return string|\Symfony\Component\HttpFoundation\Response
      * @Method("POST")
@@ -39,13 +62,19 @@ class ArticleController extends Controller
         // get heading and content from $_POST
         $article->setHeading($request->request->get('article')['heading']);
         $article->setContent($request->request->get('article')['content']);
+        $article->setTags($request->request->get('article')['tags']);
+        if ($request->request->get('article')['privacy']=='internal'){
+            $article->setPrivate(true);
+        }
+        else{
+            $article->setPrivate(false);
+        }
         $article->setUserId($this->getUser());
         $categoryId= (int)$request->request->get('category');
 
         $this->get('article_manager')->save($article, $categoryId);
 
         return new Response('Created article '.$article->getHeading());
-     //   return $this->redirectToRoute('article-main', array('response'=>'Succesfuly added article'));
     }
 
 }

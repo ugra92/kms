@@ -127,7 +127,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        if (0 === strpos($pathinfo, '/articles')) {
+        if (0 === strpos($pathinfo, '/article')) {
             // article-main
             if ($pathinfo === '/articles') {
                 if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
@@ -140,15 +140,37 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             not_articlemain:
 
             // article-add
-            if ($pathinfo === '/articles') {
-                if ($this->context->getMethod() != 'POST') {
-                    $allow[] = 'POST';
+            if ($pathinfo === '/article/add') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
                     goto not_articleadd;
                 }
 
-                return array (  '_controller' => 'AppBundle\\Controller\\ArticleController::articleAddNewAction',  '_route' => 'article-add',);
+                return array (  '_controller' => 'AppBundle\\Controller\\ArticleController::addNewAction',  '_route' => 'article-add',);
             }
             not_articleadd:
+
+            // article-edit
+            if ($pathinfo === '/article/edit') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_articleedit;
+                }
+
+                return array (  '_controller' => 'AppBundle\\Controller\\ArticleController::editAction',  '_route' => 'article-edit',);
+            }
+            not_articleedit:
+
+            // article-add-post
+            if ($pathinfo === '/article/add') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_articleaddpost;
+                }
+
+                return array (  '_controller' => 'AppBundle\\Controller\\ArticleController::articleAddNewAction',  '_route' => 'article-add-post',);
+            }
+            not_articleaddpost:
 
         }
 

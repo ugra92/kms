@@ -43,3 +43,8 @@ services:
      department_manager:
                      class: AppBundle\Entity\Manager\DepartmentManager
                      arguments: ['@department_repository']
+
+     acme_user.registration.form.type:
+             class: AppBundle\Form\Type\RegistrationFormType
+             tags:
+                 - { name: form.type, alias: acme_user_registration }

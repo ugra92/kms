@@ -20,4 +20,8 @@ class DepartmentManager {
         $this->repository->save($department);
     }
 
+    public function getAllDepartments(){
+        return $this->repository->getAllDepartments();
+    }
+
 }

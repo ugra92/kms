@@ -13,6 +13,10 @@ class DepartmentRepository extends EntityRepository
         return $this->findOneByDepartmentId($id);
     }
 
+    public function getAllDepartments(){
+        return $this->findAll();
+    }
+
     public function save(Department $department){
         $this->_em->persist($department);
         $this->_em->flush();

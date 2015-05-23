@@ -19,9 +19,10 @@ class DepartmentController extends Controller
      */
     public function indexAction()
     {
-        $userManager = $this->get('fos_user.user_manager');
-        $users = $userManager->findUsers();
-        return $this->render('Department/department.html.twig', array('users'=>$users));
+        $employeesNoDep = $this->get('user_repository')->employeesNoDepartment();
+        $departments= $this->get('department_manager')->getAllDepartments();
+        $employees = $this->get('user_repository')->findAll();
+        return $this->render('Department/department.html.twig', array('employeesNoDep'=>$employeesNoDep, 'departments'=>$departments, 'employees'=>$employees));
     }
 
     /**

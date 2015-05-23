@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityRepository;
 
 class UserRepository extends EntityRepository
 {
-    public function     findByPk($id)
+    public function findByPk($id)
     {
       return $this->findById($id);
     }
@@ -18,5 +18,7 @@ class UserRepository extends EntityRepository
         $this->_em->flush();
     }
 
-
+    public function employeesNoDepartment(){
+        return  $this->findBy(array('departmentId'=> NULL));
+    }
 }

@@ -60,6 +60,11 @@ class User extends BaseUser{
      */
     protected $comments;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $position;
+
     public function __construct()
     {
         parent::__construct();
@@ -74,6 +79,22 @@ class User extends BaseUser{
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param mixed $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 
     /**
@@ -171,6 +192,8 @@ class User extends BaseUser{
 //    {
 //        $this->groupId = $groupId;
 //    }
+
+
 
     /**
      * @return mixed
