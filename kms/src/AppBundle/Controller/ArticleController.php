@@ -7,6 +7,7 @@ use AppBundle\Form\Type\ArticleType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,8 +21,9 @@ class ArticleController extends Controller
      */
     public function indexAction()
     {
-
-        return $this->render('Article/article-all.html.twig');
+        $articles = $this->get('article_repository')->findAll();
+        $categories= $this->get('category_repository')->findAll();
+        return $this->render('Article/article-all.html.twig', array('articles'=>$articles, 'categories'=> $categories));
     }
 
 
@@ -75,6 +77,19 @@ class ArticleController extends Controller
         $this->get('article_manager')->save($article, $categoryId);
 
         return new Response('Created article '.$article->getHeading());
+    }
+
+    /**
+     * @Route("json/articles", name="json-articles-post")
+     * @param Request $request
+     * @return string|\Symfony\Component\HttpFoundation\Response
+     * @Method("POST")
+     */
+    public function jsonArticlesAction(Request $request)
+    {
+        $parameters = $request->request->get('parameter');
+        $response = $this->get('article_manager')->getArticlesFiltered($parameters);
+       return new JsonResponse($response, 200);
     }
 
 }

@@ -174,6 +174,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        // json-articles-post
+        if ($pathinfo === '/json/articles') {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_jsonarticlespost;
+            }
+
+            return array (  '_controller' => 'AppBundle\\Controller\\ArticleController::jsonArticlesAction',  '_route' => 'json-articles-post',);
+        }
+        not_jsonarticlespost:
+
         // category_main
         if ($pathinfo === '/category') {
             return array (  '_controller' => 'AppBundle\\Controller\\CategoryController::indexAction',  '_route' => 'category_main',);

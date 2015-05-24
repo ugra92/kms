@@ -4777,8 +4777,10 @@ table.sliders tr td {
 .profile-activity, .act-time , .profile-activity .act-in, .profile-activity .act-out {
     position: relative;
 }
-
-
+.articles-timeline{
+    background-color: #fff;
+    border-left: 3px solid #394a59;
+}
 .profile-activity .act-in  .arrow {
     /*border-right: 8px solid #F4F4F4 !important;*/
 }
@@ -4842,8 +4844,8 @@ table.sliders tr td {
 .act-time .act-in .text {
     border: 1px solid #e3e6ed;
     padding: 10px;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
+    /*border-radius: 4px;*/
+    /*-webkit-border-radius: 4px;*/
 }
 
 .act-time .act-out .text {

@@ -3,6 +3,7 @@ namespace AppBundle\Entity\Repository;
 
 use AppBundle\Entity\Article;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 
 class ArticleRepository extends EntityRepository
@@ -17,5 +18,11 @@ class ArticleRepository extends EntityRepository
         $this->_em->flush();
     }
 
+    public function getArticlesFiltered($sql){
+
+        $con = $this->getEntityManager()->getConnection()->prepare($sql);
+        $con->execute();
+        return $con->fetchAll();
+    }
 
 }

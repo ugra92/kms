@@ -8,3 +8,6 @@
     border-radius: 5px;
     cursor: pointer;
 }
+.articles-all .panel-body{
+    padding-top: 0;
+}
