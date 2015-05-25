@@ -52,6 +52,20 @@ class ArticleController extends Controller
     }
 
     /**
+     * @Route("/article/{id}", name="article-single")
+     * @param $id
+     * @return string|Response
+     */
+    public function singleArticleAction($id)
+    {
+        $article = $this->get('article_manager')->getArticle($id);
+        $comments= $this->get('comment_manager')->getComments($id);
+//        var_dump( $comments);
+//        exit;
+        return $this->render('Article/article-single.html.twig', array('article'=> $article, 'comments'=>$comments));
+    }
+
+    /**
      * @Route("/article/add", name="article-add-post")
      * @param Request $request
      * @return string|\Symfony\Component\HttpFoundation\Response

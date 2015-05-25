@@ -709,6 +709,9 @@
     <service id="department_repository" class="AppBundle\Entity\Repository\DepartmentRepository" factory-method="getRepository" factory-service="doctrine.orm.default_entity_manager">
       <argument>AppBundle\Entity\Department</argument>
     </service>
+    <service id="comments_repository" class="AppBundle\Entity\Repository\CommentRepository" factory-method="getRepository" factory-service="doctrine.orm.default_entity_manager">
+      <argument>AppBundle\Entity\Comment</argument>
+    </service>
     <service id="category_manager" class="AppBundle\Entity\Manager\CategoryManager">
       <argument type="service" id="category_repository"/>
     </service>
@@ -718,6 +721,9 @@
     </service>
     <service id="department_manager" class="AppBundle\Entity\Manager\DepartmentManager">
       <argument type="service" id="department_repository"/>
+    </service>
+    <service id="comment_manager" class="AppBundle\Entity\Manager\CommentManager">
+      <argument type="service" id="comments_repository"/>
     </service>
     <service id="acme_user.registration.form.type" class="AppBundle\Form\Type\RegistrationFormType">
       <tag name="form.type" alias="acme_user_registration"/>
@@ -3058,7 +3064,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>55608aae2033f</argument>
+            <argument>5563614b80a10</argument>
           </service>
         </argument>
       </argument>
@@ -3350,7 +3356,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>55608aae2033f</argument>
+            <argument>5563614b80a10</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>

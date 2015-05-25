@@ -25,6 +25,10 @@ class ArticleManager {
         return $this->categoryManager->getCategoryById($id);
     }
 
+    public function getArticle($id){
+        return $this->repository->getArticle($id);
+    }
+
     public function  getArticlesFiltered($parameter){
         if($parameter==''){
             $parameters = '1=1';

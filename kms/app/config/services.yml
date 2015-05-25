@@ -32,6 +32,12 @@ services:
                     factory_method: getRepository
                     arguments: [AppBundle\Entity\Department]
 
+     comments_repository:
+                     class: AppBundle\Entity\Repository\CommentRepository
+                     factory_service: doctrine.orm.default_entity_manager
+                     factory_method: getRepository
+                     arguments: [AppBundle\Entity\Comment]
+
      category_manager:
                class: AppBundle\Entity\Manager\CategoryManager
                arguments: ['@category_repository']
@@ -41,8 +47,12 @@ services:
                 arguments: ['@article_repository', '@category_manager']
 
      department_manager:
-                     class: AppBundle\Entity\Manager\DepartmentManager
-                     arguments: ['@department_repository']
+                 class: AppBundle\Entity\Manager\DepartmentManager
+                 arguments: ['@department_repository']
+
+     comment_manager:
+                 class: AppBundle\Entity\Manager\CommentManager
+                 arguments: ['@comments_repository']
 
      acme_user.registration.form.type:
              class: AppBundle\Form\Type\RegistrationFormType

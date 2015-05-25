@@ -10,7 +10,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\CommentRepository")
  *
  */
 class Comment {
@@ -36,6 +36,27 @@ class Comment {
      * @ORM\JoinColumn(name="article_id", referencedColumnName="articleId")
      */
     protected $articleId;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $createdAt;
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param mixed $createdAt
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
 
     /**
      * @return mixed
@@ -101,5 +122,17 @@ class Comment {
         $this->articleId = $articleId;
     }
 
+    /**
+     * Now we tell doctrine that before we persist or update we call the updatedTimestamps() function.
+     *
+     * @ORM\PrePersist
+     */
+    public function updatedTimestamps()
+    {
+        if($this->getCreatedAt() == null)
+        {
+            $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
+        }
+    }
 
 }

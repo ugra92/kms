@@ -25,4 +25,7 @@ class ArticleRepository extends EntityRepository
         return $con->fetchAll();
     }
 
+    public function getArticle($id){
+        return $this->findByArticleId($id);
+    }
 }

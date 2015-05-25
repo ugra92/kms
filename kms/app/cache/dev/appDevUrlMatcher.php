@@ -161,6 +161,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             }
             not_articleedit:
 
+            // article-single
+            if (preg_match('#^/article/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'article-single')), array (  '_controller' => 'AppBundle\\Controller\\ArticleController::singleArticleAction',));
+            }
+
             // article-add-post
             if ($pathinfo === '/article/add') {
                 if ($this->context->getMethod() != 'POST') {
@@ -188,6 +193,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // category_main
         if ($pathinfo === '/category') {
             return array (  '_controller' => 'AppBundle\\Controller\\CategoryController::indexAction',  '_route' => 'category_main',);
+        }
+
+        // json-add-comment
+        if ($pathinfo === '/json/add-comment') {
+            return array (  '_controller' => 'AppBundle\\Controller\\CommentController::indexAction',  '_route' => 'json-add-comment',);
         }
 
         // homepage

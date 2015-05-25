@@ -3,40 +3,15 @@
 
     {% endblock %}
 {% block content %}
-    <div class="col-sm-6">
-    <div class="white-panel pn">
-        <div class="white-header">
-        <h3>My Recent Articles</h3>
-    </div>
-        {% for article in user_articles %}
-            <div class="article-heading"><h5><a href="#">{{ article.heading }}</a> </h5></div>
-            <div class="article-content"><p>{{ article.content|slice(0,150) }}<a href="#">...</a></p></div>
-        {% endfor %}
-    </div>
-    </div>
-    <div class="col-sm-6">
-        <div class="white-panel pn">
-            <div class="white-header">
-                <h3>Recent Comments</h3>
+   <section id="dashboard">
+       <div class="col-lg-12">
+           <h3 class="page-header"><i class="fa fa-home"></i> Dashboard</h3>
+           <ol class="breadcrumb">
+               <li><i class="fa fa-home"></i><a href="{{ path('article-main') }}">Dashboard</a></li>
+           </ol>
+       </div>
 
-            </div>
-            {% for comment in user_comments %}
-                <div class="article-heading"><h5><a href="#">{{ comment.articleId.heading }}</a> </h5></div>
-                <div class="article-content"><p>{{ comment.text }}<a href="#">  view comment</a></p></div>
-            {% endfor %}
-        </div>
-    </div>
-    <div class="col-sm-12">
-        <div class="white-panel pn">
-            <div class="white-header">
-                <h3>News Feed</h3>
-            </div>
-            {#{% for news in department_news %}#}
-                {#<div class="article-heading"><h5><a href="#">{{ news.articles.heading}}</a> </h5></div>#}
-                {#<div class="article-content"><p>{{  news.articles.content|slice(0,150) }}<a href="#">  view comment</a></p></div>#}
-                {#{% endfor %}#}
-        </div>
-    </div>
+   </section>
 {% endblock %}
 {% block customScripts %}
     <script src="{{ asset('Dashboard/js/posts.js') }}"></script>

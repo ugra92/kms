@@ -11,3 +11,10 @@
 .articles-all .panel-body{
     padding-top: 0;
 }
+.info{
+    display: inline-block;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    font-size: 11px;
+    color: #999;
+}
