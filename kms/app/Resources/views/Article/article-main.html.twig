@@ -93,7 +93,7 @@
         //Insert tags for code preview
         $('.codeSnippets').on('click', function(){
             language= $(this).attr('for');
-            $('.jqte_editor').append('<br>&lt;'+language+'&gt;<br> Insert your code here <br>&lt;/'+language+'&gt;');
+            $('.jqte_editor').append('<br>&lt;pre class="brush: '+language+';"&gt;<br> Insert your code here <br>&lt;/pre&gt;');
 
         });
     </script>

@@ -724,6 +724,7 @@
     </service>
     <service id="comment_manager" class="AppBundle\Entity\Manager\CommentManager">
       <argument type="service" id="comments_repository"/>
+      <argument type="service" id="article_manager"/>
     </service>
     <service id="acme_user.registration.form.type" class="AppBundle\Form\Type\RegistrationFormType">
       <tag name="form.type" alias="acme_user_registration"/>
@@ -3064,7 +3065,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>5563614b80a10</argument>
+            <argument>5564d2d9640cf</argument>
           </service>
         </argument>
       </argument>
@@ -3356,7 +3357,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>5563614b80a10</argument>
+            <argument>5564d2d9640cf</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>

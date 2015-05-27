@@ -197,8 +197,14 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         // json-add-comment
         if ($pathinfo === '/json/add-comment') {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_jsonaddcomment;
+            }
+
             return array (  '_controller' => 'AppBundle\\Controller\\CommentController::indexAction',  '_route' => 'json-add-comment',);
         }
+        not_jsonaddcomment:
 
         // homepage
         if (rtrim($pathinfo, '/') === '') {
@@ -227,6 +233,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             not_departmentadd:
 
         }
+
+        // profile
+        if (0 === strpos($pathinfo, '/profile') && preg_match('#^/profile/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_profile;
+            }
+
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'profile')), array (  '_controller' => 'AppBundle\\Controller\\UserController::profileAction',));
+        }
+        not_profile:
 
         if (0 === strpos($pathinfo, '/log')) {
             if (0 === strpos($pathinfo, '/login')) {
