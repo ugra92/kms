@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 27, 2015 at 08:39 PM
+-- Generation Time: May 28, 2015 at 10:17 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.12
 
@@ -144,6 +144,29 @@ CREATE TABLE IF NOT EXISTS `document` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `task`
+--
+
+CREATE TABLE IF NOT EXISTS `task` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL,
+  `createdAt` datetime NOT NULL,
+  `finishDate` datetime NOT NULL,
+  `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `task`
+--
+
+INSERT INTO `task` (`id`, `description`, `status`, `createdAt`, `finishDate`, `title`) VALUES
+(1, 'Demo task', 50, '2015-05-28 00:00:00', '2015-05-28 00:00:00', 'First Demo task');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -179,10 +202,31 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `department_id`, `username`, `username_canonical`, `email`, `email_canonical`, `enabled`, `salt`, `password`, `last_login`, `locked`, `expired`, `expires_at`, `confirmation_token`, `password_requested_at`, `roles`, `credentials_expired`, `credentials_expire_at`, `name`, `position`) VALUES
-(1, 35, 'admin', 'admin', 'ugra1992@gmail.com', 'ugra1992@gmail.com', 1, 'tswsilbwmpcsccwgg04scowc0cgw4os', 'nHTH+n7R8ZByVZy8CxquSftUNBwQA617ABrgwgYe74qDagzPaO6ut66MAXGi7U19cJaWXUoNDxZqnetFd/+Jaw==', '2015-05-27 18:23:06', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}', 0, NULL, 'Administrator', 'System Administrator'),
+(1, 35, 'admin', 'admin', 'ugra1992@gmail.com', 'ugra1992@gmail.com', 1, 'tswsilbwmpcsccwgg04scowc0cgw4os', 'nHTH+n7R8ZByVZy8CxquSftUNBwQA617ABrgwgYe74qDagzPaO6ut66MAXGi7U19cJaWXUoNDxZqnetFd/+Jaw==', '2015-05-28 18:57:28', 0, 0, NULL, NULL, NULL, 'a:1:{i:0;s:10:"ROLE_ADMIN";}', 0, NULL, 'Administrator', 'System Administrator'),
 (2, 33, 'ugra', 'ugra', 'dzony1922@gmail.com', 'dzony1922@gmail.com', 1, '3c1rklr51zeosksgwsw08oo48gsgskw', 'QGc89rf1HxlGFQrzxYChAnG+nE7zvyNYO1mZfs/yUJTtP9iYTmG1TuoU1ODRL8TPBs2cpLXpSLzcIMEiSqWDPA==', '2015-05-17 21:31:08', 0, 0, NULL, NULL, NULL, 'a:0:{}', 0, NULL, 'Nikola Ugrinovic', 'Frontend Developer'),
-(3, 33, 'loske', 'loske', 'pavlelosic@yahoo.com', 'pavlelosic@yahoo.com', 1, 'nmz51qu2ias0ss8kk8c8gw4osog8048', 'Z1qRzs/U6bkinTr63GSh9t5v49g7SycuOTIsNrbJp4eEDsIQwHOXlbGNY2O+W7y8p/8zXDO19JmrOcoZjNMefA==', '2015-05-27 18:24:17', 0, 0, NULL, NULL, NULL, 'a:0:{}', 0, NULL, 'Pavle Losic', 'Frontend Developer'),
+(3, 33, 'loske', 'loske', 'pavlelosic@yahoo.com', 'pavlelosic@yahoo.com', 1, 'nmz51qu2ias0ss8kk8c8gw4osog8048', 'Z1qRzs/U6bkinTr63GSh9t5v49g7SycuOTIsNrbJp4eEDsIQwHOXlbGNY2O+W7y8p/8zXDO19JmrOcoZjNMefA==', '2015-05-28 18:56:43', 0, 0, NULL, NULL, NULL, 'a:0:{}', 0, NULL, 'Pavle Losic', 'Frontend Developer'),
 (4, NULL, 'peter', 'peter', 'peter@gmail.com', 'peter@gmail.com', 1, 'sx4sod756f4484ws840w44g8sgks4o8', '9YkQ90rSk2X42xCf0rzvhu7vFAx4sardPaR/v0SkKeLgazW9Dv00IyhBBhNALoEz8ObJNAyV+weJznow3XSYeA==', '2015-05-23 16:33:01', 0, 0, NULL, NULL, NULL, 'a:0:{}', 0, NULL, 'Peter Thomas', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_tasks`
+--
+
+CREATE TABLE IF NOT EXISTS `users_tasks` (
+  `user_id` int(11) NOT NULL,
+  `task_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`task_id`),
+  KEY `IDX_B72FC1DEA76ED395` (`user_id`),
+  KEY `IDX_B72FC1DE8DB60186` (`task_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `users_tasks`
+--
+
+INSERT INTO `users_tasks` (`user_id`, `task_id`) VALUES
+(1, 1);
 
 --
 -- Constraints for dumped tables
@@ -213,6 +257,13 @@ ALTER TABLE `document`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `FK_2DA17977AE80F5DF` FOREIGN KEY (`department_id`) REFERENCES `department` (`departmentId`);
+
+--
+-- Constraints for table `users_tasks`
+--
+ALTER TABLE `users_tasks`
+  ADD CONSTRAINT `FK_B72FC1DE8DB60186` FOREIGN KEY (`task_id`) REFERENCES `task` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_B72FC1DEA76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
