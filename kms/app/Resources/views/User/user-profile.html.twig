@@ -4,11 +4,20 @@
         .weather-category ul{
             border:none;
         }
+        #tasks{
+            margin-top: 30px;
+        }
+        .progress.thin{
+            position: relative;
+        }
+        .task-status-num{
+            position: absolute;
+            left: 42%;
+        }
     </style>
 {% endblock %}
 {% block content %}
     <section id="profile-content">
-
         <div class="col-lg-12">
             <h3 class="page-header"><i class="fa fa-user"></i> Profile</h3>
             <ol class="breadcrumb">
@@ -16,65 +25,9 @@
                 <li><i class="fa fa-user"></i>Profile</li>
             </ol>
         </div>
-
         <!-- profile-widget -->
-        <div class="col-lg-12">
-            <div class="profile-widget profile-widget-info">
-                <div class="panel-body">
-                    <div class="col-lg-2 col-sm-2">
-                        <h4>{{ user.name }}</h4>
-                        <div class="follow-ava">
-                            <img src="http://www.thebalsagroup.org/wp-content/uploads/2014/10/Five-Promotional-Items-For-the-Savvy-Businessman.png" alt="">
-                        </div>
-                        <h6>{{ user.position }}</h6>
-                    </div>
-                    <div class="col-lg-4 col-sm-4 follow-info">
-                        <p>{{ user.name }}, currently working in a {{ user.departmentId.name }} department.</p>
-                        <p>{{ user.email }}</p>
-                        <p><span class="info">Username: </span>{{ user.username }}</i></p>
-                    </div>
-
-                    <div class="col-lg-2 col-sm-6 follow-info weather-category">
-                        <ul>
-                            <li class="active">
-
-                                <i class="fa fa-comments fa-2x"> </i><br>
-
-                                {#{{ user.getComments|length}} comments#}
-                            </li>
-
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-sm-6 follow-info weather-category">
-                        <ul>
-                            <li class="active">
-
-                                <i class="fa fa-bell fa-2x"> </i><br>
-
-                                Contrary to popular belief, Lorem Ipsum is not simply
-                            </li>
-
-                        </ul>
-                    </div>
-                    <div class="col-lg-2 col-sm-6 follow-info weather-category">
-                        <ul>
-                            <li class="active">
-
-                                <i class="fa fa-tachometer fa-2x"> </i><br>
-
-                                Contrary to popular belief, Lorem Ipsum is not simply
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- page start-->
-
-        <div class="col-lg-12">
-
-        </div>
+        {% include ('User/profileHeading.html.twig') %}
+        {% include ('User/tasks.html.twig') %}
         <!-- page end-->
     </section>
 {% endblock %}

@@ -1,0 +1,49 @@
+<div class="col-lg-12">
+    <div class="row">
+        <div class="col-sm-8">
+            <section class="panel panel-default" id="tasks">
+                    <div class="panel-heading">
+                        <h2><i class="fa fa-flag-o red"></i><strong>Registered Users</strong></h2>
+                        <div class="panel-actions">
+                            <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
+                            <a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
+                            <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
+                        </div>
+                    </div>
+                <div class="panel-body progress-panel">
+                    <table class="table bootstrap-datatable countries personal-task">
+                        <thead>
+                        <tr>
+                            <th>Start date</th>
+                            <th>End date</th>
+                            <th>Task title</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for task in user.tasks %}
+                            <tr>
+                                <td> {{ task.createdAt|date("F d, Y") }} </td>
+                                <td> {{ task.finishDate|date("F d, Y") }} </td>
+                                <td>
+                                    {{ task.title }}
+                                </td>
+                                <td>
+                                    <div class="progress thin">
+                                        {#<span class="task-status-num">{{ task.status }}</span>#}
+                                        <span data-tooltip="{{ task.status }}%">
+                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ task.status }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ task.status }}%">
+                                        </div>
+                                    </span>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

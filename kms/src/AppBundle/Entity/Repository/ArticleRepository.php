@@ -13,6 +13,10 @@ class ArticleRepository extends EntityRepository
 
     }
 
+    public function getUserArticles($id){
+        return $this->findByUserId($id);
+    }
+
     public function save(Article $article){
         $this->_em->persist($article);
         $this->_em->flush();

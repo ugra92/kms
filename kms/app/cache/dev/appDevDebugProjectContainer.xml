@@ -712,6 +712,9 @@
     <service id="comments_repository" class="AppBundle\Entity\Repository\CommentRepository" factory-method="getRepository" factory-service="doctrine.orm.default_entity_manager">
       <argument>AppBundle\Entity\Comment</argument>
     </service>
+    <service id="task_repository" class="AppBundle\Entity\Repository\TaskRepository" factory-method="getRepository" factory-service="doctrine.orm.default_entity_manager">
+      <argument>AppBundle\Entity\Task</argument>
+    </service>
     <service id="category_manager" class="AppBundle\Entity\Manager\CategoryManager">
       <argument type="service" id="category_repository"/>
     </service>
@@ -725,6 +728,9 @@
     <service id="comment_manager" class="AppBundle\Entity\Manager\CommentManager">
       <argument type="service" id="comments_repository"/>
       <argument type="service" id="article_manager"/>
+    </service>
+    <service id="task_manager" class="AppBundle\Entity\Manager\TaskManager">
+      <argument type="service" id="task_repository"/>
     </service>
     <service id="acme_user.registration.form.type" class="AppBundle\Form\Type\RegistrationFormType">
       <tag name="form.type" alias="acme_user_registration"/>
@@ -3065,7 +3071,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>5564d2d9640cf</argument>
+            <argument>556767e3d8d11</argument>
           </service>
         </argument>
       </argument>
@@ -3357,7 +3363,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>5564d2d9640cf</argument>
+            <argument>556767e3d8d11</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
             <argument type="service" id="security.authentication.manager"/>
           </service>

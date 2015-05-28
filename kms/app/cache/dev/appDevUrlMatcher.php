@@ -190,9 +190,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
         not_jsonarticlespost:
 
-        // category_main
-        if ($pathinfo === '/category') {
-            return array (  '_controller' => 'AppBundle\\Controller\\CategoryController::indexAction',  '_route' => 'category_main',);
+        if (0 === strpos($pathinfo, '/c')) {
+            // category_main
+            if ($pathinfo === '/category') {
+                return array (  '_controller' => 'AppBundle\\Controller\\CategoryController::indexAction',  '_route' => 'category_main',);
+            }
+
+            // code_main
+            if ($pathinfo === '/code') {
+                return array (  '_controller' => 'AppBundle\\Controller\\CodeController::indexAction',  '_route' => 'code_main',);
+            }
+
         }
 
         // json-add-comment
@@ -235,13 +243,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         // profile
-        if (0 === strpos($pathinfo, '/profile') && preg_match('#^/profile/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+        if (rtrim($pathinfo, '/') === '/profile') {
             if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                 $allow = array_merge($allow, array('GET', 'HEAD'));
                 goto not_profile;
             }
 
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'profile')), array (  '_controller' => 'AppBundle\\Controller\\UserController::profileAction',));
+            if (substr($pathinfo, -1) !== '/') {
+                return $this->redirect($pathinfo.'/', 'profile');
+            }
+
+            return array (  '_controller' => 'AppBundle\\Controller\\UserController::profileAction',  '_route' => 'profile',);
         }
         not_profile:
 

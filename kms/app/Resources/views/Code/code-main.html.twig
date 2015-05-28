@@ -1,0 +1,52 @@
+{% extends ':layout:master.html.twig' %}
+{% block customStylesheet %}
+
+{% endblock %}
+{% block content %}
+    <section id="dashboard">
+        <div class="col-lg-12">
+            <h3 class="page-header"><i class="fa fa-home"></i> Dashboard</h3>
+            <ol class="breadcrumb">
+                <li><i class="fa fa-home"></i><a href="{{ path('article-main') }}">Dashboard</a></li>
+            </ol>
+        </div>
+        <div class="col-md-4">
+            <textarea class="code-css" id="code-css" rows="15" style="width: 100%">ssssssssss</textarea>
+        </div>
+        <div class="col-md-4">
+            <textarea class="code-html" id="code-html" rows="15" style="width: 100%">asasas</textarea>
+        </div>
+        <div class="col-md-4">
+            <textarea class="code-js" id="code-js" rows="15" style="width: 100%">aaaaaaaaa</textarea>
+        </div>
+
+        <div class="col-md-12">
+
+        </div>
+    </section>
+{% endblock %}
+{% block customScripts %}
+    {% include('Code/scripts.html.twig') %}
+    <script>
+        $(document).ready(function(){
+          var css=  $('.code-css').ace({ theme: 'monokai', lang: 'css' });
+          var js=  $('.code-js').ace({ theme: 'monokai', lang: 'javascript' });
+          var html=  $('.code-html').ace({ theme: 'monokai', lang: 'html' });
+        });
+
+//        ace.require("ace/ext/language_tools");
+//        var editor = ace.edit("code-html");
+//        var css = ace.edit("code-css");
+//        editor.setOption("minLines", 20);
+//       console.log(editor.getSession().getValue());
+//       console.log(css.getSession().getValue());
+//        // enable autocompletion and snippets
+//        editor.setOptions({
+//            enableBasicAutocompletion: true,
+//            enableSnippets: true,
+//            enableLiveAutocompletion: false,
+//            minLines: 20
+//        });
+    </script>
+{% endblock %}
+

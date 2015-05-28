@@ -15,6 +15,10 @@ class CommentRepository extends EntityRepository
         return $this->findByArticleId($id);
     }
 
+    public function getUserComments($id){
+        return $this->findByUserId($id);
+    }
+
     public function addComment($comment){
         $this->_em->persist($comment);
         $this->_em->flush();

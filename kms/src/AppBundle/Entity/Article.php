@@ -238,6 +238,7 @@ class Article {
      */
     public function addComment(\AppBundle\Entity\Comment $comments)
     {
+
         $this->comments[] = $comments;
 
         return $this;

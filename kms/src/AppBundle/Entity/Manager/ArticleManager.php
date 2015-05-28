@@ -21,6 +21,10 @@ class ArticleManager {
 
     }
 
+    public function getUserArticles($id){
+        return $this->repository->getUserArticles($id);
+    }
+
     public function getCategory($id){
         return $this->categoryManager->getCategoryById($id);
     }

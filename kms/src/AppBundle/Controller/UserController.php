@@ -11,14 +11,14 @@ class UserController extends Controller
 {
 
     /**
-     * @Route("/profile/{id}", name="profile")
+     * @Route("/profile/", name="profile")
      * @return string|\Symfony\Component\HttpFoundation\Response
      * @Method("GET")
      */
-    public function profileAction($id)
+    public function profileAction()
     {
         $user = $this->getUser();
-//        var_dump($user->getComments());
+//        var_dump($user->getComments()[0]);
 //        exit;
         return $this->render('User/user-profile.html.twig', array('user'=> $user));
     }

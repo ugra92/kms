@@ -2,6 +2,8 @@
 namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
@@ -46,7 +48,7 @@ class User extends BaseUser{
     protected $departmentId;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article", mappedBy="articleId")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article", mappedBy="userId")
      */
     protected $articles;
 
@@ -56,7 +58,7 @@ class User extends BaseUser{
     protected $documents;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="commentId")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="userId")
      */
     protected $comments;
 
@@ -65,12 +67,19 @@ class User extends BaseUser{
      */
     protected $position;
 
+    /**
+     * @ManyToMany(targetEntity="Task", inversedBy="users")
+     * @JoinTable(name="users_tasks")
+     **/
+    protected  $tasks;
+
     public function __construct()
     {
         parent::__construct();
         $this->comments= new ArrayCollection();
         $this->documents= new ArrayCollection();
         $this->articles= new ArrayCollection();
+        $this->tasks= new ArrayCollection();
     }
 
     /**
@@ -100,99 +109,18 @@ class User extends BaseUser{
     /**
      * @return mixed
      */
-//    public function getName()
-//    {
-//        return $this->name;
-//    }
-//
-//    /**
-//     * @param mixed $name
-//     */
-//    public function setName($name)
-//    {
-//        $this->name = $name;
-//    }
-//
-//    /**
-//     * @return mixed
-//     */
-//    public function getUsername()
-//    {
-//        return $this->username;
-//    }
-//
-//    /**
-//     * @param mixed $username
-//     */
-//    public function setUsername($username)
-//    {
-//        $this->username = $username;
-//    }
-//
-//    /**
-//     * @return mixed
-//     */
-//    public function getPassword()
-//    {
-//        return $this->password;
-//    }
-//
-//    /**
-//     * @param mixed $password
-//     */
-//    public function setPassword($password)
-//    {
-//        $this->password = $password;
-//    }
-//
-//    /**
-//     * @return mixed
-//     */
-//    public function getEmail()
-//    {
-//        return $this->email;
-//    }
-//
-//    /**
-//     * @param mixed $email
-//     */
-//    public function setEmail($email)
-//    {
-//        $this->email = $email;
-//    }
-//
-//    /**
-//     * @return mixed
-//     */
-//    public function getRole()
-//    {
-//        return $this->role;
-//    }
-//
-//    /**
-//     * @param mixed $role
-//     */
-//    public function setRole($role)
-//    {
-//        $this->role = $role;
-//    }
-//
-//    /**
-//     * @return mixed
-//     */
-//    public function getGroupId()
-//    {
-//        return $this->groupId;
-//    }
-//
-//    /**
-//     * @param mixed $groupId
-//     */
-//    public function setGroupId($groupId)
-//    {
-//        $this->groupId = $groupId;
-//    }
+    public function getTasks()
+    {
+        return $this->tasks;
+    }
 
+    /**
+     * @param mixed $tasks
+     */
+    public function setTasks($tasks)
+    {
+        $this->tasks = $tasks;
+    }
 
 
     /**
@@ -275,73 +203,90 @@ class User extends BaseUser{
         $this->name = $name;
     }
 
+    /**
+     * @param Task $tasks
+     * @return $this
+     */
+    public function addTask(\AppBundle\Entity\Task $tasks)
+    {
+        $tasks->addUser($this);
+        $this->tasks[] = $tasks;
+        return $this;
+    }
 
     /**
-     * Add articles
+     * @param Task $tasks
+     */
+    public function removeTask(\AppBundle\Entity\Task $tasks)
+    {
+        $this->tasks->removeElement($tasks);
+    }
+
+    /**
+     * Add article
      *
-     * @param \AppBundle\Entity\Article $articles
+     * @param \AppBundle\Entity\Article $article
      * @return User
      */
-    public function addArticle(\AppBundle\Entity\Article $articles)
+    public function addArticle(\AppBundle\Entity\Article $article)
     {
-        $this->articles[] = $articles;
+        $article->setUserId($this);
+        $this->articles[] = $article;
+        return $this;
+    }
+
+    /**
+     * @param Article $article
+     */
+    public function removeArticle(\AppBundle\Entity\Article $article)
+    {
+        $this->articles->removeElement($article);
+    }
+
+    /**
+     * Add document
+     *
+     * @param \AppBundle\Entity\Document $document
+     * @return User
+     */
+    public function addDocument(\AppBundle\Entity\Document $document)
+    {
+        $this->documents[] = $document;
 
         return $this;
     }
 
     /**
-     * Remove articles
+     * Remove document
      *
-     * @param \AppBundle\Entity\Article $articles
+     * @param \AppBundle\Entity\Document $document
      */
-    public function removeArticle(\AppBundle\Entity\Article $articles)
+    public function removeDocument(\AppBundle\Entity\Document $document)
     {
-        $this->articles->removeElement($articles);
+        $this->documents->removeElement($document);
     }
 
     /**
-     * Add documents
+     * Add comment
      *
-     * @param \AppBundle\Entity\Document $documents
+     * @param \AppBundle\Entity\Comment $comment
      * @return User
      */
-    public function addDocument(\AppBundle\Entity\Document $documents)
+    public function addComment(\AppBundle\Entity\Comment $comment)
     {
-        $this->documents[] = $documents;
-
-        return $this;
-    }
-
-    /**
-     * Remove documents
-     *
-     * @param \AppBundle\Entity\Document $documents
-     */
-    public function removeDocument(\AppBundle\Entity\Document $documents)
-    {
-        $this->documents->removeElement($documents);
-    }
-
-    /**
-     * Add comments
-     *
-     * @param \AppBundle\Entity\Comment $comments
-     * @return User
-     */
-    public function addComment(\AppBundle\Entity\Comment $comments)
-    {
-        $this->comments[] = $comments;
-
+        $comment->setUserId($this);
+        $this->comments[] = $comment;
         return $this;
     }
 
     /**
      * Remove comments
      *
-     * @param \AppBundle\Entity\Comment $comments
+     * @param Comment $comment
+     * @internal param Comment $comments
      */
-    public function removeComment(\AppBundle\Entity\Comment $comments)
+    public function removeComment(\AppBundle\Entity\Comment $comment)
     {
-        $this->comments->removeElement($comments);
+        $this->comments->removeElement($comment);
     }
 }

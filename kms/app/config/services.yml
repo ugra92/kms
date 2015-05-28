@@ -38,6 +38,12 @@ services:
                      factory_method: getRepository
                      arguments: [AppBundle\Entity\Comment]
 
+     task_repository:
+                          class: AppBundle\Entity\Repository\TaskRepository
+                          factory_service: doctrine.orm.default_entity_manager
+                          factory_method: getRepository
+                          arguments: [AppBundle\Entity\Task]
+
      category_manager:
                class: AppBundle\Entity\Manager\CategoryManager
                arguments: ['@category_repository']
@@ -53,6 +59,10 @@ services:
      comment_manager:
                  class: AppBundle\Entity\Manager\CommentManager
                  arguments: ['@comments_repository', '@article_manager']
+
+     task_manager:
+                  class: AppBundle\Entity\Manager\TaskManager
+                  arguments: ['@task_repository']
 
      acme_user.registration.form.type:
              class: AppBundle\Form\Type\RegistrationFormType

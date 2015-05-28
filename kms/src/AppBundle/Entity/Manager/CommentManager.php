@@ -20,6 +20,10 @@ class CommentManager {
         return $this->repository->getComments($id);
      }
 
+    public function getUserComments($id){
+        return $this->repository->getUserComments($id);
+    }
+
      public function addComment(Comment $comment, $articleId){
 
          $articles = $this->articleManager->getArticle($articleId);
