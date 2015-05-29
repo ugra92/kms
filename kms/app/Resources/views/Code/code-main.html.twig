@@ -38,9 +38,7 @@
     {% include('Code/scripts.html.twig') %}
     <script>
         $(document).ready(function(){
-//            var css=  $('.code-css').ace({ theme: 'monokai', lang: 'css' });
-//            var js=  $('.code-js').ace({ theme: 'monokai', lang: 'javascript' });
-//            var html=  $('.code-html').ace({ theme: 'monokai', lang: 'html' });
+
         });
         view = $('#view');
         ace.require("ace/ext/language_tools");
@@ -54,47 +52,26 @@
         css.setTheme("ace/theme/monokai");
         js.setTheme("ace/theme/monokai");
 
-        editor.getSession().on('change', function () {
+        $('#dugme').on('click', function () {
             view.contents().find('body').html(editor.getSession().getValue()+"<"+"script>"+js.getSession().getValue()+"</"+"script>");
         });
-
         css.getSession().on('change', function () {
             var bootstrap="<link rel='stylesheet' href='{{ asset('Base/css/bootstrap.min.css') }}'>";
             view.contents().find('head').html(bootstrap+"<style>"+css.getSession().getValue()+"</style>");
         });
-
         $('#dugme').on('click', function () {
             var jquery= "<script src='{{ asset('Base/js/jquery-2.1.3.js') }}'><"+"/script>";
-            var fix= "var iframe = document.getElementById('view');
-            var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
-
-            });";
             view.contents().find('body').html(""+jquery+""+editor.getSession().getValue()+"<"+"script>"+js.getSession().getValue()+"</"+"script>");
         });
 
-        //        ace.require("ace/ext/language_tools");
-        //        var editor = ace.edit("code-html");
-        //        var css = ace.edit("code-css");
-        //        editor.setOption("minLines", 20);
-        //        console.log(editor.getSession().getValue());
-        //        console.log(css.getSession().getValue());
-        //        // enable autocompletion and snippets
-        //        editor.setOptions({
-        //            enableBasicAutocompletion: true,
-        //            enableSnippets: true,
-        //            enableLiveAutocompletion: false,
-        //            minLines: 20
-        //        });
-        //        editor.on('input', function() {
-        //            var value= css.getSession().getValue();
-        //            $('#iframe-body').html(value);
-        //            console.log(editor.getSession().getValue());
-        //        });
-        //        css.on('input', function() {
-        //            $('#iframe-head').html(css.getSession().getValue());
-        //            $('#iframe-head').load();
-        //            console.log(css.getSession().getValue());
-        //        });
+//            KEY TO MAKE IT WORK
+//        var iframe = document.getElementById('view');
+//        var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
+//        var a = $(innerDoc).find('#a');
+//        a.click(function(){
+//            alert('daads');
+//        });
+//        a.text('Novi');
     </script>
 {% endblock %}
 
