@@ -1,0 +1,13 @@
+#code-container{
+    background-color: rgb(39, 40, 34);
+}
+#code-container h3{
+    border-bottom: 1px solid #2F3129;
+}
+.ace_editor{
+    min-height: 300px;
+    border: none;
+}
+#view{
+    width: 100%;
+}

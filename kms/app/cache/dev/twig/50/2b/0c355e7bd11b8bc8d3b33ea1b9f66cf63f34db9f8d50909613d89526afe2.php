@@ -39,26 +39,12 @@ class __TwigTemplate_502b0c355e7bd11b8bc8d3b33ea1b9f66cf63f34db9f8d50909613d8952
         $this->displayBlock('body', $context, $blocks);
         // line 13
         echo "</body>
-<script src=\"";
-        // line 14
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Base/js/jquery-2.1.3.js"), "html", null, true);
-        echo "\"></script>
-<script src=\"";
-        // line 15
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Base/js/bootstrap.min.js"), "html", null, true);
-        echo "\"></script>
-<script src=\"";
-        // line 16
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Base/js/sb-admin-2.js"), "html", null, true);
-        echo "\"></script>
-<script src=\"";
-        // line 17
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Base/js/metisMenu.js"), "html", null, true);
-        echo "\"></script>
 ";
-        // line 18
+        // line 14
+        $this->env->loadTemplate("layout/scripts.html.twig")->display($context);
+        // line 15
         $this->displayBlock('customScripts', $context, $blocks);
-        // line 20
+        // line 17
         echo "</html>";
     }
 
@@ -74,7 +60,7 @@ class __TwigTemplate_502b0c355e7bd11b8bc8d3b33ea1b9f66cf63f34db9f8d50909613d8952
     {
     }
 
-    // line 18
+    // line 15
     public function block_customScripts($context, array $blocks = array())
     {
     }
@@ -91,6 +77,6 @@ class __TwigTemplate_502b0c355e7bd11b8bc8d3b33ea1b9f66cf63f34db9f8d50909613d8952
 
     public function getDebugInfo()
     {
-        return array (  78 => 18,  73 => 11,  69 => 8,  66 => 7,  62 => 20,  60 => 18,  56 => 17,  52 => 16,  48 => 15,  44 => 14,  41 => 13,  39 => 11,  35 => 9,  33 => 7,  30 => 6,  28 => 5,  22 => 1,);
+        return array (  64 => 15,  59 => 11,  55 => 8,  52 => 7,  48 => 17,  46 => 15,  44 => 14,  41 => 13,  39 => 11,  35 => 9,  33 => 7,  30 => 6,  28 => 5,  22 => 1,);
     }
 }

@@ -39,7 +39,7 @@ class __TwigTemplate_f6758d7d68dec4c33a5845225e3fbb2713c274f73f97c17857842d2d43b
     {
         // line 4
         echo "    <link href=\"";
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/framework/css/exception.css", null, true), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Core/css/exception.css", null, true), "html", null, true);
         echo "\" rel=\"stylesheet\" type=\"text/css\" media=\"all\" />
 ";
     }

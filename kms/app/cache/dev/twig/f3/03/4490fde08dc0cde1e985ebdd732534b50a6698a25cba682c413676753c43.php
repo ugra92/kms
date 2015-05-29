@@ -33,11 +33,11 @@ class __TwigTemplate_f3034490fde08dc0cde1e985ebdd732534b50a6698a25cba682c4136767
         echo "</title>
         <link href=\"";
         // line 7
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/framework/css/structure.css", null, true), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Core/css/structure.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" />
         <link href=\"";
         // line 8
-        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("bundles/framework/css/body.css", null, true), "html", null, true);
+        echo twig_escape_filter($this->env, $this->env->getExtension('assets')->getAssetUrl("Core/css/body.css"), "html", null, true);
         echo "\" rel=\"stylesheet\" />
         ";
         // line 9
