@@ -38,6 +38,12 @@ services:
                      factory_method: getRepository
                      arguments: [AppBundle\Entity\Comment]
 
+     code_repository:
+                          class: AppBundle\Entity\Repository\CodeSnippetRepository
+                          factory_service: doctrine.orm.default_entity_manager
+                          factory_method: getRepository
+                          arguments: [AppBundle\Entity\CodeSnippet]
+
      task_repository:
                           class: AppBundle\Entity\Repository\TaskRepository
                           factory_service: doctrine.orm.default_entity_manager
@@ -59,6 +65,10 @@ services:
      comment_manager:
                  class: AppBundle\Entity\Manager\CommentManager
                  arguments: ['@comments_repository', '@article_manager']
+
+     code_manager:
+                  class: AppBundle\Entity\Manager\CodeSnippetManager
+                  arguments: ['@code_repository']
 
      task_manager:
                   class: AppBundle\Entity\Manager\TaskManager

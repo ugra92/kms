@@ -10,23 +10,31 @@
             </ol>
         </div>
         <div class="col-md-12">
-            <div class="col-md-12" id="code-container">
-                <div class="col-md-4">
-                    <h3>Css</h3>
-                    <textarea class="code-css code-snippet" id="code-css" rows="15" style="width: 100%"></textarea>
-                </div>
-                <div class="col-md-4">
-                    <h3>HTML</h3>
-                    <textarea class="code-html code-snippet" id="code-html" rows="15" style="width: 100%"></textarea>
-                </div>
-                <div class="col-md-4">
-                    <h3>JavaScript</h3>
-                    <textarea class="code-js code-snippet" id="code-js" rows="15" style="width: 100%"></textarea>
+            <button class="btn btn-success btn-code " id="dugme">Run</button>
+            <button class="btn btn-primary btn-code " id="add-button">Save</button>
+            <div class="form-group col-md-4">
+                <div class="row">
+                    <input type="text" class="form-control" placeholder="Code title..." id="codeHeading"/>
                 </div>
             </div>
         </div>
         <div class="col-md-12">
-            <button class="btn btn-success" id="dugme">Run</button>
+            <div class="col-md-12" id="code-container">
+                <div class="col-md-4">
+                    <h3>Css</h3>
+                    <textarea name="code-css" class="code-css code-snippet" id="code-css" rows="15" style="width: 100%"></textarea>
+                </div>
+                <div class="col-md-4">
+                    <h3>HTML</h3>
+                    <textarea name="code-html" class="code-html code-snippet" id="code-html" rows="15" style="width: 100%"></textarea>
+                </div>
+                <div class="col-md-4">
+                    <h3>JavaScript</h3>
+                    <textarea name="code-js" class="code-js code-snippet" id="code-js" rows="15" style="width: 100%"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
             <ul class="responsive-menu">
                 <li>
                     <div class="info-box blue-bg" data-resolution="480">
@@ -142,7 +150,7 @@
                 return code.replace(/(')/gm,"\'");
             }
             else {
-                return "";
+                return code;
             }
         }
 
@@ -155,7 +163,18 @@
         //        });
         //        a.text('Novi');
     </script>
-
+    <script>
+        $('#add-button').on('click', function(){
+            var htmlCode = editor.getSession().getValue();
+            var cssCode = css.getSession().getValue();
+            var jsCode = js.getSession().getValue();
+            var heading = $('#codeHeading').val();
+            $.post("{{ path('json-code-add') }}", {htmlCode:htmlCode, cssCode:cssCode, jsCode:jsCode, heading:heading}, function(data){
+                console.log(css.getSession().getValue());
+//                console.log(data);
+            });
+        });
+    </script>
     <script>
         $('.responsive-menu .info-box').on('click', function(){
             if($(this).attr('data-resolution')=='full'){

@@ -198,13 +198,33 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
             if (0 === strpos($pathinfo, '/code')) {
                 // code_main
-                if ($pathinfo === '/code') {
-                    return array (  '_controller' => 'AppBundle\\Controller\\CodeController::indexAction',  '_route' => 'code_main',);
+                if (preg_match('#^/code/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'code_main')), array (  '_controller' => 'AppBundle\\Controller\\CodeController::indexAction',));
                 }
 
-                // code_add
-                if ($pathinfo === '/code/add') {
-                    return array (  '_controller' => 'AppBundle\\Controller\\CodeController::codeAddAction',  '_route' => 'code_add',);
+                if (0 === strpos($pathinfo, '/code/add')) {
+                    // code_add
+                    if ($pathinfo === '/code/add') {
+                        if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                            $allow = array_merge($allow, array('GET', 'HEAD'));
+                            goto not_code_add;
+                        }
+
+                        return array (  '_controller' => 'AppBundle\\Controller\\CodeController::codeAddAction',  '_route' => 'code_add',);
+                    }
+                    not_code_add:
+
+                    // json-code-add
+                    if ($pathinfo === '/code/add') {
+                        if ($this->context->getMethod() != 'POST') {
+                            $allow[] = 'POST';
+                            goto not_jsoncodeadd;
+                        }
+
+                        return array (  '_controller' => 'AppBundle\\Controller\\CodeController::jsonCodeAddAction',  '_route' => 'json-code-add',);
+                    }
+                    not_jsoncodeadd:
+
                 }
 
             }

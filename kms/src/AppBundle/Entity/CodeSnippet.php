@@ -9,7 +9,7 @@
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\CodeSnippetRepository")
  *
  */
 
@@ -22,21 +22,21 @@ class CodeSnippet {
     protected $codeSnippetId;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $heading;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     protected $css;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     protected $html;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      */
     protected $js;
 
@@ -219,6 +219,7 @@ class CodeSnippet {
     public function __construct()
     {
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->setCreatedAt(new \DateTime(date('Y-m-d H:i:s')));
     }
 
 
