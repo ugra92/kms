@@ -1,5 +1,8 @@
 <?php
 namespace AppBundle\Entity;
+use AppBundle\Entity\Article;
+use AppBundle\Entity\CodeSnippet;
+use AppBundle\Entity\Task;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinTable;
@@ -53,6 +56,11 @@ class User extends BaseUser{
     protected $articles;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\CodeSnippet", mappedBy="userId")
+     */
+    protected $codeSnippets;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Document", mappedBy="documentId")
      */
     protected $documents;
@@ -80,6 +88,7 @@ class User extends BaseUser{
         $this->documents= new ArrayCollection();
         $this->articles= new ArrayCollection();
         $this->tasks= new ArrayCollection();
+        $this->codeSnippets= new ArrayCollection();
     }
 
     /**
@@ -138,6 +147,24 @@ class User extends BaseUser{
     {
         $this->departmentId = $departmentId;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCodeSnippets()
+    {
+        return $this->codeSnippets;
+    }
+
+    /**
+     * @param mixed $codeSnippets
+     */
+    public function setCodeSnippets($codeSnippets)
+    {
+        $this->codeSnippets = $codeSnippets;
+    }
+
+
 
     /**
      * @return mixed
@@ -203,11 +230,18 @@ class User extends BaseUser{
         $this->name = $name;
     }
 
+    public function addSnippet(CodeSnippet $codeSnippet)
+    {
+        $codeSnippet->setUserId($this);
+        $this->codeSnippets[] = $codeSnippet;
+        return $this;
+    }
+
     /**
      * @param Task $tasks
      * @return $this
      */
-    public function addTask(\AppBundle\Entity\Task $tasks)
+    public function addTask(Task $tasks)
     {
         $tasks->addUser($this);
         $this->tasks[] = $tasks;
@@ -217,7 +251,7 @@ class User extends BaseUser{
     /**
      * @param Task $tasks
      */
-    public function removeTask(\AppBundle\Entity\Task $tasks)
+    public function removeTask(Task $tasks)
     {
         $this->tasks->removeElement($tasks);
     }
@@ -225,10 +259,10 @@ class User extends BaseUser{
     /**
      * Add article
      *
-     * @param \AppBundle\Entity\Article $article
+     * @param Article $article
      * @return User
      */
-    public function addArticle(\AppBundle\Entity\Article $article)
+    public function addArticle(Article $article)
     {
         $article->setUserId($this);
         $this->articles[] = $article;
@@ -238,7 +272,7 @@ class User extends BaseUser{
     /**
      * @param Article $article
      */
-    public function removeArticle(\AppBundle\Entity\Article $article)
+    public function removeArticle(Article $article)
     {
         $this->articles->removeElement($article);
     }

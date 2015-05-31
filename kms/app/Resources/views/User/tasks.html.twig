@@ -32,7 +32,7 @@
                                     <div class="progress thin">
                                         {#<span class="task-status-num">{{ task.status }}</span>#}
                                         <span data-tooltip="{{ task.status }}%">
-                                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ task.status }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ task.status }}%">
+                                        <div class="progress-bar progress-bar-success tooltips"  data-placement="top" data-toggle="tooltip" data-original-title="{{ task.status }}" role="progressbar" aria-valuenow="{{ task.status }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ task.status }}%">
                                         </div>
                                     </span>
                                     </div>

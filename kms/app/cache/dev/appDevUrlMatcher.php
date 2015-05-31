@@ -196,9 +196,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'AppBundle\\Controller\\CategoryController::indexAction',  '_route' => 'category_main',);
             }
 
-            // code_main
-            if ($pathinfo === '/code') {
-                return array (  '_controller' => 'AppBundle\\Controller\\CodeController::indexAction',  '_route' => 'code_main',);
+            if (0 === strpos($pathinfo, '/code')) {
+                // code_main
+                if ($pathinfo === '/code') {
+                    return array (  '_controller' => 'AppBundle\\Controller\\CodeController::indexAction',  '_route' => 'code_main',);
+                }
+
+                // code_add
+                if ($pathinfo === '/code/add') {
+                    return array (  '_controller' => 'AppBundle\\Controller\\CodeController::codeAddAction',  '_route' => 'code_add',);
+                }
+
             }
 
         }

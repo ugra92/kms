@@ -14,23 +14,25 @@
             <div class="col-md-12" id="code-container">
                 <div class="col-md-4">
                     <h3>Css</h3>
-                    <textarea class="code-css" id="code-css" rows="15" style="width: 100%"></textarea>
+                    <textarea class="code-css code-snippet" id="code-css" rows="15" style="width: 100%">{{ code[0].css }}</textarea>
                 </div>
                 <div class="col-md-4">
                     <h3>HTML</h3>
-                    <textarea class="code-html" id="code-html" rows="15" style="width: 100%"></textarea>
+                    <textarea class="code-html code-snippet" id="code-html" rows="15" style="width: 100%">{{ code[0].html|replace({('#'):'#view'}) }}</textarea>
                 </div>
                 <div class="col-md-4">
                     <h3>JavaScript</h3>
-                    <textarea class="code-js" id="code-js" rows="15" style="width: 100%"></textarea>
+                    <textarea class="code-js code-snippet" id="code-js" rows="15" style="width: 100%">{{ code[0].js }}</textarea>
                 </div>
             </div>
         </div>
         <div class="col-md-12">
             <button id="dugme">uradi</button>
-            <iframe src="" frameborder="0" id="view">
-                <div id="script"></div>
-            </iframe>
+            <div id="iframe-holder">
+                <iframe src="" class="resizable" frameborder="0" id="view">
+                    <div id="script"></div>
+                </iframe>
+            </div>
         </div>
     </section>
 {% endblock %}
@@ -52,18 +54,40 @@
         css.setTheme("ace/theme/monokai");
         js.setTheme("ace/theme/monokai");
 
+
+        {#js.on("change", function(){#}
+        {#var annot = js.getSession().getAnnotations();#}
+        {#console.log(annot.length);#}
+        {#if(annot.length==0){#}
+        {#if(js.getSession().getValue()!=''){#}
+        {#console.log('usao u 2 if');#}
+        {#var parsedJs = parse(js.getSession().getValue());#}
+        {#console.log(parsedJs);#}
+        {#var jquery= "<script src='{{ asset('Base/js/jquery-2.1.3.js') }}'><\/script>";#}
+        {#view.contents().find('body').html(""+jquery+""+editor.getSession().getValue()+"<"+"script>"+context+parsedJs+"<\/script>");#}
+        {#}#}
+        {#}#}
+        {#for (var key in annot){#}
+        {#if (annot.hasOwnProperty(key))#}
+        {#console.log("[" + annot[key].row + " , " + annot[key].column + "] - \t" + annot[key].text);#}
+
+        {#}#}
+        {#});#}
+
+
+
         var context = "var iframe = document.getElementById('view');" +
                 " var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;";
 
-        $('#dugme').on('click', function () {
-//            var parsedJs = parse(js.getSession().getValue());
+        editor.on('change', function () {
             view.contents().find('body').html(editor.getSession().getValue()+"<"+"script>"+context+"</"+"script>");
         });
-        css.getSession().on('change', function () {
+        css.on('change', function () {
             var bootstrap="<link rel='stylesheet' href='{{ asset('Base/css/bootstrap.min.css') }}'>";
             view.contents().find('head').html(bootstrap+"<style>"+css.getSession().getValue()+"</style>");
         });
-        $('#dugme').on('click', function () {
+
+        $("#dugme").on('click', function () {
             if(js.getSession().getValue()!=''){
                 var parsedJs = parse(js.getSession().getValue());
                 console.log(parsedJs);
@@ -74,7 +98,7 @@
 
         function parse(code){
             var code = code.replace(/'/g, '"');
-            var regex = /\$\("(#|\.).+"\)/g;
+            var regex = /(\$\("(#|\.).+"\))|(\$\(".+"\))/g;
             var selectors = code.match(regex);
             if(selectors!=null){
                 var tmpSelectors = [selectors.length];
@@ -99,5 +123,6 @@
         //        });
         //        a.text('Novi');
     </script>
+
 {% endblock %}
 

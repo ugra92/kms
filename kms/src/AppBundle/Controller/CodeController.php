@@ -19,8 +19,19 @@ class CodeController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $code = $this->getDoctrine()->getManager()->getRepository('AppBundle:CodeSnippet')->findAll();
+//        var_dump($code);
+//        exit;
+        return $this->render('Code/code-main.html.twig', array('code'=>$code));
+    }
 
-        return $this->render('Code/code-main.html.twig');
+    /**
+     * @Route("/code/add", name="code_add")
+     */
+    public function codeAddAction()
+    {
+
+        return $this->render('Code/code-add.html.twig');
     }
 
 }
