@@ -13,7 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 class CodeController extends Controller
 {
     /**
-     * @Route("/code/{id}", name="code_main")
+     * @Route("/code/{id}", name="code_main", requirements={
+     *     "id": "\d+"})
      * @param $id
      * @return Response
      * @internal param Request $request
@@ -50,7 +51,15 @@ class CodeController extends Controller
         $code->setHeading($request->request->get('heading'));
 
         return  $this->get('code_manager')->saveCode($code);
+    }
 
+    /**
+     * @Route("/code/all", name="json-code-all")
+     * @Method("GET")
+     */
+    public function allSnipppetsAction(){
+        $code = $this->get('code_manager')->getAllSnippets();
+       return $this->render('Code/code-all.html.twig', array('code'=>$code));
     }
 
 }
