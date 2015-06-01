@@ -198,32 +198,46 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
             if (0 === strpos($pathinfo, '/code')) {
                 // code_main
-                if (preg_match('#^/code/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                if (preg_match('#^/code/(?P<id>\\d+)$#s', $pathinfo, $matches)) {
                     return $this->mergeDefaults(array_replace($matches, array('_route' => 'code_main')), array (  '_controller' => 'AppBundle\\Controller\\CodeController::indexAction',));
                 }
 
-                if (0 === strpos($pathinfo, '/code/add')) {
-                    // code_add
-                    if ($pathinfo === '/code/add') {
+                if (0 === strpos($pathinfo, '/code/a')) {
+                    if (0 === strpos($pathinfo, '/code/add')) {
+                        // code_add
+                        if ($pathinfo === '/code/add') {
+                            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                                $allow = array_merge($allow, array('GET', 'HEAD'));
+                                goto not_code_add;
+                            }
+
+                            return array (  '_controller' => 'AppBundle\\Controller\\CodeController::codeAddAction',  '_route' => 'code_add',);
+                        }
+                        not_code_add:
+
+                        // json-code-add
+                        if ($pathinfo === '/code/add') {
+                            if ($this->context->getMethod() != 'POST') {
+                                $allow[] = 'POST';
+                                goto not_jsoncodeadd;
+                            }
+
+                            return array (  '_controller' => 'AppBundle\\Controller\\CodeController::jsonCodeAddAction',  '_route' => 'json-code-add',);
+                        }
+                        not_jsoncodeadd:
+
+                    }
+
+                    // json-code-all
+                    if ($pathinfo === '/code/all') {
                         if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                             $allow = array_merge($allow, array('GET', 'HEAD'));
-                            goto not_code_add;
+                            goto not_jsoncodeall;
                         }
 
-                        return array (  '_controller' => 'AppBundle\\Controller\\CodeController::codeAddAction',  '_route' => 'code_add',);
+                        return array (  '_controller' => 'AppBundle\\Controller\\CodeController::allSnipppetsAction',  '_route' => 'json-code-all',);
                     }
-                    not_code_add:
-
-                    // json-code-add
-                    if ($pathinfo === '/code/add') {
-                        if ($this->context->getMethod() != 'POST') {
-                            $allow[] = 'POST';
-                            goto not_jsoncodeadd;
-                        }
-
-                        return array (  '_controller' => 'AppBundle\\Controller\\CodeController::jsonCodeAddAction',  '_route' => 'json-code-add',);
-                    }
-                    not_jsoncodeadd:
+                    not_jsoncodeall:
 
                 }
 
@@ -251,24 +265,43 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
         }
 
-        if (0 === strpos($pathinfo, '/admin/department')) {
-            // department-main
-            if ($pathinfo === '/admin/department') {
-                return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::indexAction',  '_route' => 'department-main',);
-            }
-
-            // department-add
-            if ($pathinfo === '/admin/department/new') {
-                if ($this->context->getMethod() != 'POST') {
-                    $allow[] = 'POST';
-                    goto not_departmentadd;
+        if (0 === strpos($pathinfo, '/admin')) {
+            if (0 === strpos($pathinfo, '/admin/department')) {
+                // department-main
+                if ($pathinfo === '/admin/department') {
+                    return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::indexAction',  '_route' => 'department-main',);
                 }
 
-                return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::departmentAddNewAction',  '_route' => 'department-add',);
+                // department-add
+                if ($pathinfo === '/admin/department/new') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_departmentadd;
+                    }
+
+                    return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::departmentAddNewAction',  '_route' => 'department-add',);
+                }
+                not_departmentadd:
+
             }
-            not_departmentadd:
+
+            // tasks_main
+            if ($pathinfo === '/admin/tasks') {
+                return array (  '_controller' => 'AppBundle\\Controller\\TaskController::indexAction',  '_route' => 'tasks_main',);
+            }
 
         }
+
+        // json_tasks_add
+        if ($pathinfo === '/json/admin/tasks/add') {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_json_tasks_add;
+            }
+
+            return array (  '_controller' => 'AppBundle\\Controller\\TaskController::jsonAddTaskAction',  '_route' => 'json_tasks_add',);
+        }
+        not_json_tasks_add:
 
         // profile
         if (rtrim($pathinfo, '/') === '/profile') {
