@@ -251,24 +251,43 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
         }
 
-        if (0 === strpos($pathinfo, '/admin/department')) {
-            // department-main
-            if ($pathinfo === '/admin/department') {
-                return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::indexAction',  '_route' => 'department-main',);
-            }
-
-            // department-add
-            if ($pathinfo === '/admin/department/new') {
-                if ($this->context->getMethod() != 'POST') {
-                    $allow[] = 'POST';
-                    goto not_departmentadd;
+        if (0 === strpos($pathinfo, '/admin')) {
+            if (0 === strpos($pathinfo, '/admin/department')) {
+                // department-main
+                if ($pathinfo === '/admin/department') {
+                    return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::indexAction',  '_route' => 'department-main',);
                 }
 
-                return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::departmentAddNewAction',  '_route' => 'department-add',);
+                // department-add
+                if ($pathinfo === '/admin/department/new') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_departmentadd;
+                    }
+
+                    return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::departmentAddNewAction',  '_route' => 'department-add',);
+                }
+                not_departmentadd:
+
             }
-            not_departmentadd:
+
+            // tasks_main
+            if ($pathinfo === '/admin/tasks') {
+                return array (  '_controller' => 'AppBundle\\Controller\\TaskController::indexAction',  '_route' => 'tasks_main',);
+            }
 
         }
+
+        // json_tasks_add
+        if ($pathinfo === '/json/admin/tasks/add') {
+            if ($this->context->getMethod() != 'POST') {
+                $allow[] = 'POST';
+                goto not_json_tasks_add;
+            }
+
+            return array (  '_controller' => 'AppBundle\\Controller\\TaskController::jsonAddTaskAction',  '_route' => 'json_tasks_add',);
+        }
+        not_json_tasks_add:
 
         // profile
         if (rtrim($pathinfo, '/') === '/profile') {
