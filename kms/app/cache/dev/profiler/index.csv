@@ -60,3 +60,5 @@ b8286c,127.0.0.1,POST,http://localhost:8000/json/admin/tasks/add,1433168442,
 970dda,127.0.0.1,GET,http://localhost:8000/json/admin/tasks/add,1433168603,5d347c
 5d347c,127.0.0.1,POST,http://localhost:8000/json/admin/tasks/add,1433168604,
 66e065,127.0.0.1,GET,http://localhost:8000/,1433180600,
+d925d0,127.0.0.1,GET,http://localhost:8000/,1433185084,
+10e32d,127.0.0.1,GET,http://localhost:8000/admin/tasks,1433185941,
