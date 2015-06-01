@@ -17,7 +17,7 @@ class TaskRepository extends EntityRepository
 ////        return $this->findBy()
 //    }
 
-    public function save(Task $task){
+    public function saveTask(Task $task){
         $this->_em->persist($task);
         $this->_em->flush();
     }

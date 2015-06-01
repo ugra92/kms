@@ -169,7 +169,7 @@ class Task implements  JsonSerializable {
 
     public function __construct()
     {
-
+        $this->setStatus(0);
         $this->users= new ArrayCollection();
     }
 
@@ -188,7 +188,6 @@ class Task implements  JsonSerializable {
      */
     public function addUser(\AppBundle\Entity\User $users)
     {
-
         $this->users[] = $users;
         return $this;
     }

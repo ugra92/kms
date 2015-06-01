@@ -1,7 +1,5 @@
 <?php
 namespace AppBundle\Entity\Manager;
-use AppBundle\Entity\Article;
-use  AppBundle\Entity\Repository\ArticleRepository;
 use AppBundle\Entity\Repository\TaskRepository;
 
 class TaskManager {
@@ -14,9 +12,8 @@ class TaskManager {
 
     }
 
-//    public function getAllUserTasks($id){
-//
-//        return $this->repository->getAllUserTasks($id);
-//    }
+    public function saveTask($task){
+        $this->repository->saveTask($task);
+    }
 
 }

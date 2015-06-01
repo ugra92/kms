@@ -16,7 +16,7 @@
             {% if code[0].userId == app.user %}
                 <div class="form-group col-md-4">
                     <div class="row">
-                        <input type="text" class="form-control" placeholder="Code title..." id="codeHeading"/>
+                        <input type="text" class="form-control" placeholder="Code title..." id="codeHeading" value="{{ code[0].heading }}"/>
                     </div>
                 </div>
                 <button class="btn btn-primary btn-code ">Edit</button>

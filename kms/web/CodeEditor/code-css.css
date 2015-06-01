@@ -66,9 +66,11 @@
     transform: rotate(-90deg);
 }
 #dugme{
-    margin-left: 20px;
     margin-right: 20px;
 }
 #codeHeading{
+    border-radius: 0;
+}
+#codeTags{
     border-radius: 0;
 }

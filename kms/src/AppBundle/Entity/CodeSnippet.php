@@ -41,6 +41,11 @@ class CodeSnippet {
     protected $js;
 
     /**
+     * @ORM\Column(type="text")
+     */
+    protected $tags;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected $createdAt;

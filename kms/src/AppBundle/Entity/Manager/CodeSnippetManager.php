@@ -21,4 +21,8 @@ class CodeSnippetManager {
         return $this->repository->saveCode($code);
     }
 
+    public function getAllSnippets(){
+        return $this->repository->findAll();
+    }
+
  }
