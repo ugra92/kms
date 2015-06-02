@@ -13,9 +13,11 @@ class TaskRepository extends EntityRepository
        return $this->findOneById($id);
     }
 
-//    public function getAllUserTasks($id){
-////        return $this->findBy()
-//    }
+    public function removeTask($task){
+         $this->_em->remove($task);
+        $this->_em->flush();
+
+    }
 
     public function saveTask(Task $task){
         $this->_em->persist($task);

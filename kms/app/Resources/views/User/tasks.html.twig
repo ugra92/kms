@@ -3,11 +3,11 @@
         <div class="col-sm-8">
             <section class="panel panel-default" id="tasks">
                     <div class="panel-heading">
-                        <h2><i class="fa fa-flag-o red"></i><strong>Registered Users</strong></h2>
+                        <h2><i class="fa fa-tasks red"></i><strong>Tasks</strong></h2>
                         <div class="panel-actions">
-                            <a href="index.html#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
-                            <a href="index.html#" class="btn-minimize"><i class="fa fa-chevron-up"></i></a>
-                            <a href="index.html#" class="btn-close"><i class="fa fa-times"></i></a>
+                            <a href="#" class="btn-setting"><i class="fa fa-rotate-right"></i></a>
+                            <a href="#" class="btn-minimize wminimize"><i class="fa fa-chevron-up"></i></a>
+                            <a href="#" class="btn-close"><i class="fa fa-times"></i></a>
                         </div>
                     </div>
                 <div class="panel-body progress-panel">
@@ -21,7 +21,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for task in user.tasks %}
+                        {% for task in app.user.tasks %}
                             <tr>
                                 <td> {{ task.createdAt|date("F d, Y") }} </td>
                                 <td> {{ task.finishDate|date("F d, Y") }} </td>
@@ -32,7 +32,7 @@
                                     <div class="progress thin">
                                         {#<span class="task-status-num">{{ task.status }}</span>#}
                                         <span data-tooltip="{{ task.status }}%">
-                                        <div class="progress-bar progress-bar-success tooltips"  data-placement="top" data-toggle="tooltip" data-original-title="{{ task.status }}" role="progressbar" aria-valuenow="{{ task.status }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ task.status }}%">
+                                        <div class="progress-bar {% if task.status < 30  %}progress-bar-danger{% elseif task.status < 60 %}progress-bar-warning {% else %}progress-bar-success {% endif %} tooltips"  data-placement="top" data-toggle="tooltip" data-original-title="{{ task.status }}" role="progressbar" aria-valuenow="{{ task.status }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ task.status }}%">
                                         </div>
                                     </span>
                                     </div>

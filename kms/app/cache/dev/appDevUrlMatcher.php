@@ -166,6 +166,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'article-single')), array (  '_controller' => 'AppBundle\\Controller\\ArticleController::singleArticleAction',));
             }
 
+            // article-single-print
+            if (0 === strpos($pathinfo, '/article/print') && preg_match('#^/article/print/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'article-single-print')), array (  '_controller' => 'AppBundle\\Controller\\ArticleController::singleArticlePrintAction',));
+            }
+
             // article-add-post
             if ($pathinfo === '/article/add') {
                 if ($this->context->getMethod() != 'POST') {
@@ -292,16 +297,30 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // json_tasks_add
-        if ($pathinfo === '/json/admin/tasks/add') {
-            if ($this->context->getMethod() != 'POST') {
-                $allow[] = 'POST';
-                goto not_json_tasks_add;
-            }
+        if (0 === strpos($pathinfo, '/json/admin/tasks')) {
+            // json_tasks_add
+            if ($pathinfo === '/json/admin/tasks/add') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_json_tasks_add;
+                }
 
-            return array (  '_controller' => 'AppBundle\\Controller\\TaskController::jsonAddTaskAction',  '_route' => 'json_tasks_add',);
+                return array (  '_controller' => 'AppBundle\\Controller\\TaskController::jsonAddTaskAction',  '_route' => 'json_tasks_add',);
+            }
+            not_json_tasks_add:
+
+            // json_tasks_remove
+            if ($pathinfo === '/json/admin/tasks/remove') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_json_tasks_remove;
+                }
+
+                return array (  '_controller' => 'AppBundle\\Controller\\TaskController::jsonRemoveTaskAction',  '_route' => 'json_tasks_remove',);
+            }
+            not_json_tasks_remove:
+
         }
-        not_json_tasks_add:
 
         // profile
         if (rtrim($pathinfo, '/') === '/profile') {

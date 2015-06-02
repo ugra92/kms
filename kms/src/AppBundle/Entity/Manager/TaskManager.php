@@ -12,6 +12,11 @@ class TaskManager {
 
     }
 
+    public function removeTask($taskId){
+        $task = $this->repository->findByPk($taskId);
+        $this->repository->removeTask($task);
+    }
+
     public function saveTask($task){
         $this->repository->saveTask($task);
     }

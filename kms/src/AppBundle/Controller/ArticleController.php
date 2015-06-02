@@ -66,6 +66,22 @@ class ArticleController extends Controller
     }
 
     /**
+     * @Route("/article/print/{id}", name="article-single-print")
+     * @param $id
+     * @return string|Response
+     */
+    public function singleArticlePrintAction($id)
+    {
+        $article = $this->get('article_manager')->getArticle($id);
+        $comments= $this->get('comment_manager')->getComments($id);
+
+        $mpdfService = $this->get('tfox.mpdfport');
+        $html = $this->render('Article/print.html.twig');
+        return  ($response = $mpdfService->generatePdfResponse($html));
+
+    }
+
+    /**
      * @Route("/article/add", name="article-add-post")
      * @param Request $request
      * @return string|\Symfony\Component\HttpFoundation\Response

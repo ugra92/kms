@@ -7,7 +7,6 @@
  */
 
 namespace AppBundle\Entity;
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToMany;
@@ -175,7 +174,7 @@ class Task implements  JsonSerializable {
 
     function jsonSerialize()
     {
-        // TODO: Implement jsonSerialize() method.
+
     }
 
 
@@ -183,22 +182,27 @@ class Task implements  JsonSerializable {
     /**
      * Add users
      *
-     * @param \AppBundle\Entity\User $users
+     * @param User $users
      * @return Task
      */
-    public function addUser(\AppBundle\Entity\User $users)
+    public function addUser(User $users)
     {
+//        var_dump($users->getTasks());
+//        exit;
         $this->users[] = $users;
+//        $users->setTasks($this);
         return $this;
     }
 
     /**
      * Remove users
      *
-     * @param \AppBundle\Entity\User $users
+     * @param User $users
      */
-    public function removeUser(\AppBundle\Entity\User $users)
+    public function removeUser(User $users)
     {
         $this->users->removeElement($users);
     }
+
+
 }

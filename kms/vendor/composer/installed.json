@@ -1718,7 +1718,7 @@
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/192c53916942847aee687722af54f431aead0b70",
+            "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/92d5624f2a29e74d8fd9d2a94d7ed7998a8c2809",
             "reference": "192c53916942847aee687722af54f431aead0b70",
             "shasum": ""
         },
@@ -1774,6 +1774,108 @@
         "homepage": "http://friendsofsymfony.github.com",
         "keywords": [
             "User management"
+        ]
+    },
+    {
+        "name": "mpdf/mpdf",
+        "version": "v5.7.4",
+        "version_normalized": "5.7.4.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/mpdf/mpdf.git",
+            "reference": "f9a374c7ea975ce8c795cec4dfd17ef55addac9c"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/mpdf/mpdf/zipball/f9a374c7ea975ce8c795cec4dfd17ef55addac9c",
+            "reference": "f9a374c7ea975ce8c795cec4dfd17ef55addac9c",
+            "shasum": ""
+        },
+        "require": {
+            "ext-mbstring": "*",
+            "php": ">=4.3.10"
+        },
+        "time": "2014-12-14 18:32:11",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "mpdf.php",
+                "classes"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-1.0+"
+        ],
+        "authors": [
+            {
+                "name": "Ian Back"
+            }
+        ],
+        "description": "A PHP class to generate PDF files from HTML with Unicode/UTF-8 and CJK support",
+        "homepage": "http://www.mpdf1.com/mpdf/index.php",
+        "keywords": [
+            "pdf",
+            "php",
+            "utf-8"
+        ]
+    },
+    {
+        "name": "galmet/mpdf-port-bundle",
+        "version": "1.2.1",
+        "version_normalized": "1.2.1.0",
+        "target-dir": "TFox/MpdfPortBundle",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/galmet/MpdfPortBundle.git",
+            "reference": "d02ce0f913556436d2dcb1830b360dde24f74dec"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/galmet/MpdfPortBundle/zipball/d02ce0f913556436d2dcb1830b360dde24f74dec",
+            "reference": "d02ce0f913556436d2dcb1830b360dde24f74dec",
+            "shasum": ""
+        },
+        "require": {
+            "mpdf/mpdf": "~5.7",
+            "symfony/framework-bundle": "~2.1"
+        },
+        "require-dev": {
+            "sensio/framework-extra-bundle": "*",
+            "symfony/browser-kit": "*",
+            "symfony/class-loader": "*",
+            "symfony/security-bundle": "*",
+            "symfony/yaml": "*"
+        },
+        "time": "2014-01-22 09:11:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.2-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-0": {
+                "TFox\\MpdfPortBundle": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Sergei Beljakov",
+                "email": "sergei.beljakov@tfox.eu"
+            }
+        ],
+        "description": "A wrapper for mPDF class which allows to use mPDF in Symfony2 projects",
+        "homepage": "http://github.com/tasmanianfox/MpdfPortBundle",
+        "keywords": [
+            "mpdf",
+            "pdf"
         ]
     }
 ]

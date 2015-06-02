@@ -81,7 +81,7 @@
                             <td>{{ task.title }}</td>
                             <td>{{ task.createdAt|date("F d, Y") }}</td>
                             <td>{{ task.finishDate|date("F d, Y") }}</td>
-                            <td>{{ task.users[0] }}</td>
+                            <td>{% for user in task.users%}{{ user.name }}<br/>{% endfor %}</td>
                             {#<td>{{ task.status }}%</td>#}
                             <td><div class="progress progress-striped">
                                     <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ task.status }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ task.status }}%">
@@ -93,7 +93,7 @@
                                 <div class="btn-group">
                                     <a class="btn btn-primary" href="#"><i class="fa fa-pencil"></i></a>
                                     {#<a class="btn btn-success" href="#"><i class="icon_check_alt2"></i></a>#}
-                                    <a class="btn btn-danger" href="#"><i class="fa fa-ban"></i></a>
+                                    <a class="btn btn-danger remove-task" href="#"><i class="fa fa-ban"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -106,6 +106,12 @@
 {% endblock %}
 {% block customScripts %}
     <script>
+        var title = $('#taskTitle').val();
+        var dateFrom = $('#dateFrom').val();
+        var dateTo = $('#dateTo').val();
+        var description = $('#description').val();
+        var employees = $('#employees').val();
+
         $('#saveTask').on('click', function(){
             var title = $('#taskTitle').val();
             var dateFrom = $('#dateFrom').val();
@@ -114,6 +120,23 @@
             var employees = $('#employees').val();
             $.post("{{ path('json_tasks_add')}}", {title:title, dateFrom:dateFrom, dateTo:dateTo, description:description, employees:employees}, function(data){
 
+            });
+
+        });
+
+        $('.remove-task').on('click', function(e){
+            var self =$(this);
+            e.preventDefault();
+            bootbox.confirm("Are you sure?", function(result) {
+                if(result==true){
+                    var id = self.parent().parent().parent().attr('id').toString();
+                    $.post("{{ path('json_tasks_remove')}}", { taskId:id }, function(data){
+                        self.parent().parent().parent().remove();
+                    });
+                }
+                else{
+
+                }
             });
 
         });

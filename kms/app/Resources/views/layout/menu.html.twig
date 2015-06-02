@@ -4,7 +4,7 @@
     </div>
 
     <!--logo start-->
-    <a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
+    <a href="index.html" class="logo">UL <span class="lite">KMS</span></a>
     <!--logo end-->
 
     <div class="nav search-row" id="top_menu">
@@ -44,7 +44,7 @@
                                     <div class="percent">{{ task.status }}%</div>
                                 </div>
                                 <div class="progress progress-striped">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ task.status }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ task.status }}%">
+                                    <div class="progress-bar {% if task.status < 30  %}progress-bar-danger{% elseif task.status < 60 %}progress-bar-warning {% else %}progress-bar-success {% endif %}" role="progressbar" aria-valuenow="{{ task.status }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ task.status }}%">
                                         <span class="sr-only">{{ task.status }}% Complete (success)</span>
                                     </div>
                                 </div>

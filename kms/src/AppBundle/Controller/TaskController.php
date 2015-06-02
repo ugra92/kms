@@ -10,6 +10,7 @@ use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -41,16 +42,27 @@ class TaskController extends Controller
         $task->setCreatedAt(new DateTime($request->request->get('dateFrom')));
         $task->setFinishDate(new DateTime( $request->request->get('dateTo')));
         $task->setDescription($request->request->get('description'));
-        foreach($request->request->get('employees') as $employee){
-         $user=  $this->get('user_repository')->findByPk($employee);
-        $task->addUser($user[0]);
-        }
-
         $this->get('task_manager')->saveTask($task);
+        foreach($request->request->get('employees') as $employee){
+            $user=  $this->get('user_repository')->findByPk($employee);
+            $user[0]->addTask($task);
+        }
+        $this->getDoctrine()->getManager()->flush();
+        return new JsonResponse(array('Success'));
+    }
 
-//        var_dump($task);
-//        exit;
-        return "Ok";
+
+    /**
+     * @Route("json/admin/tasks/remove", name="json_tasks_remove")
+     * @Method("POST")
+     * @param Request $request
+     * @return Response
+     */
+    public function jsonRemoveTaskAction(Request $request)
+    {
+        $taskId=$request->request->get('taskId');
+        $this->get('task_manager')->removeTask($taskId);
+        return new JsonResponse(array('Success'));
     }
 
 }
