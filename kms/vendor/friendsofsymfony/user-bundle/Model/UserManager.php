@@ -137,7 +137,7 @@ abstract class UserManager implements UserManagerInterface, UserProviderInterfac
      */
     public function refreshUser(SecurityUserInterface $user)
     {
-        trigger_error('Using the UserManager as user provider is deprecated. Use FOS\UserBundle\Security\UserProvider instead.', E_USER_DEPRECATED);
+//        trigger_error('Using the UserManager as user provider is deprecated. Use FOS\UserBundle\Security\UserProvider instead.', E_USER_DEPRECATED);
 
         $class = $this->getClass();
         if (!$user instanceof $class) {

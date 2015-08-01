@@ -134,6 +134,10 @@
 {% endblock %}
 
 {% block customScripts %}
+    <script src="{{ asset('Base/js/syntaxHighlighter/shCore.js') }}"></script>
+    <script src="{{ asset('Base/js/syntaxHighlighter/shBrushJScript.js') }}"></script>
+    <script src="{{ asset('Base/js/syntaxHighlighter/shBrushCss.js') }}"></script>
+    <script src="{{ asset('Base/js/syntaxHighlighter/shBrushPhp.js') }}"></script>
 
     <script>
         SyntaxHighlighter.all();

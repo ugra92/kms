@@ -117,9 +117,11 @@
                     var actTime = renderDiv('act-time');
                     var activityBody = renderDiv('activity-body act-in articles-timeline');
                     var text = renderDiv('text');
+                    var url = "{{ path('article-single', {'id': 'articleID'}) }}";
+                    url = url.replace("articleID", val.articleId);
                     var textInner= " <a href='#' class='activity-img'><img class='avatar' src='http://www.thebalsagroup.org/wp-content/uploads/2014/10/Five-Promotional-Items-For-the-Savvy-Businessman.png' alt=''></a>" +
                             " <p class='attribution'><a href='#'>"+val.name+"</a>"+val.createdAt+"</p>" +
-                            " <h5>"+ val.heading+ "</h5>"+
+                            " <h5><a href='"+url+"'>"+ val.heading+ "</h5></a>"+
                             "<p>"+val.content.substring(0,150)+"</p>";
                     $('.articles-all').append(panelBody.html(profileActivity.html(actTime.html(activityBody.html(text.html(textInner))))));
                     console.log(val);
