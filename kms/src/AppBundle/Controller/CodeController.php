@@ -58,8 +58,8 @@ class CodeController extends Controller
      * @Method("GET")
      */
     public function allSnipppetsAction(){
-        $code = $this->get('code_manager')->getAllSnippets();
-       return $this->render('Code/code-all.html.twig', array('code'=>$code));
+        $codes = $this->get('code_manager')->getAllSnippets();
+       return $this->render('Code/code-all.html.twig', array('codes'=>$codes));
     }
 
 }

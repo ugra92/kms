@@ -2,6 +2,11 @@
 {% block customStylesheet %}
     <link rel="stylesheet" href="{{ asset('Article/articleBase.css') }}"/>
     <link rel="stylesheet" href="{{ asset('Article/plugin/textEditor/jquery-te-1.4.0.css') }}"/>
+    <style>
+        .input-field{
+            margin-top: 15px;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -10,7 +15,7 @@
             <h3 class="page-header"><i class="fa fa-file-text-o"></i> Articles</h3>
             <ol class="breadcrumb">
                 <li><i class="fa fa-file-text-o"></i><a href="index.html">Articles</a></li>
-                <li><i class="fa fa-plus"></i>Add New</li>
+                <li class="active"><i class="fa fa-plus"></i>Add New</li>
             </ol>
         </div>
         <div class="col-md-3">
@@ -50,26 +55,34 @@
         </div>
         <div class="col-sm-9">
             {{ form_start(form) }}
-            <div class="form-group">
+            <div class="input-field ">
                 {{ form_row(form.heading) }}
             </div>
             <div class="form-group">
                 {{ form_row(form.content) }}
             </div>
-            <div class="form-group">
-                <label for="category">Choose category</label>
-                <select class="form-control" name="category" id="category">
+            <div class="input-field ">
+                <select name="category" id="category">
                     {% for category in categories %}
                         <option value="{{ category.getCategoryId }}">{{ category.getName }}</option>
                     {% endfor %}
                 </select>
+                <label for="">Choose category</label>
             </div>
             <div class="form-group">
                 {{ form_row(form.tags) }}
             </div>
-            <div class="form-group">
-                {{ form_row(form.privacy) }}
-            </div>
+            {#<div class="input-field form-group">#}
+                {#<select name="category" id="category">#}
+                        {#<option value="public">Public</option>#}
+                        {#<option value="internal">Internal</option>#}
+                {#</select>#}
+                {#<label for="">Privacy</label>#}
+            {#</div>#}
+            {#<div class="input-field">#}
+                {#{{ form_row(form.privacy) }}#}
+                {#<label for="">Privacy</label>#}
+            {#</div>#}
             {{ form_end(form) }}
             {% if response is defined %}
                 {{ response }}
@@ -81,6 +94,7 @@
 {% block customScripts %}
     <script src="{{ asset('Article/plugin/textEditor/jquery-te-1.4.0.min.js') }}"></script>
     <script>
+
         $('.jqtext').jqte();
         // settings of status
         var jqteStatus = true;
@@ -89,6 +103,8 @@
             jqteStatus = jqteStatus ? false : true;
             $('.jqtext').jqte({"status" : jqteStatus})
         });
+
+        $('select').material_select();
 
         //Insert tags for code preview
         $('.codeSnippets').on('click', function(){

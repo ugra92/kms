@@ -31,9 +31,15 @@ class Category {
      */
     protected $articles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Video", mappedBy="videoId")
+     */
+    protected $videos;
+
     function __construct()
     {
         $this->articles= new ArrayCollection();
+        $this->videos= new ArrayCollection();
     }
 
     
@@ -86,6 +92,24 @@ class Category {
         $this->articles = $articles;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getVideos()
+    {
+        return $this->videos;
+    }
+
+    /**
+     * @param mixed $videos
+     */
+    public function setVideos($videos)
+    {
+        $this->videos = $videos;
+    }
+
+
+
     function __toString()
     {
         return $this->name;
@@ -114,5 +138,25 @@ class Category {
     public function removeArticle(\AppBundle\Entity\Article $articles)
     {
         $this->articles->removeElement($articles);
+    }
+
+
+    /**
+     * @param Video $videos
+     * @return $this
+     */
+    public function addVideo(\AppBundle\Entity\Video $videos)
+    {
+        $this->videos[] = $videos;
+        $videos->setCategoryId($this);
+        return $this;
+    }
+
+    /**
+     * @param Video $videos
+     */
+    public function removeVideo(\AppBundle\Entity\Video  $videos)
+    {
+        $this->videos->removeElement($videos);
     }
 }

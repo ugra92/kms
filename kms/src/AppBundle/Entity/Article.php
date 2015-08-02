@@ -64,6 +64,12 @@ class Article {
     protected $comments;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $postType;
+
+
+    /**
      * @return mixed
      */
     public function getArticleId()
@@ -228,6 +234,7 @@ class Article {
     public function __construct()
     {
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->postType = "Article";
     }
 
     /**

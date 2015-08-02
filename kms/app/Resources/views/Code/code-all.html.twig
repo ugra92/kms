@@ -10,7 +10,9 @@
                 <li><i class="fa fa-code"></i><a href="{{ path('article-main') }}">Code</a></li>
             </ol>
         </div>
-
+        {% for code in codes %}
+            {{ code.codeSnippetId }}
+        {% endfor %}
     </section>
 {% endblock %}
 {% block customScripts %}

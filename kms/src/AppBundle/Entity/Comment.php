@@ -33,11 +33,18 @@ class Comment implements  JsonSerializable {
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     protected $userId;
+
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Article", inversedBy="comments")
      * @ORM\JoinColumn(name="article_id", referencedColumnName="articleId")
      */
     protected $articleId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Video", inversedBy="comments")
+     * @ORM\JoinColumn(name="video_id", referencedColumnName="videoId")
+     */
+    protected $videoId;
 
     /**
      * @ORM\Column(type="datetime")
@@ -123,6 +130,24 @@ class Comment implements  JsonSerializable {
     {
         $this->articleId = $articleId;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getVideoId()
+    {
+        return $this->videoId;
+    }
+
+    /**
+     * @param mixed $videoId
+     */
+    public function setVideoId($videoId)
+    {
+        $this->videoId = $videoId;
+    }
+
+
 
     /**
      * Now we tell doctrine that before we persist or update we call the updatedTimestamps() function.

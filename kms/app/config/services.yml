@@ -20,6 +20,12 @@ services:
                factory_method: getRepository
                arguments: [AppBundle\Entity\Article]
 
+     video_repository:
+                    class: AppBundle\Entity\Repository\VideoRepository
+                    factory_service: doctrine.orm.default_entity_manager
+                    factory_method: getRepository
+                    arguments: [AppBundle\Entity\Video]
+
      user_repository:
                     class: AppBundle\Entity\Repository\UserRepository
                     factory_service: doctrine.orm.default_entity_manager
@@ -57,6 +63,10 @@ services:
      article_manager:
                 class: AppBundle\Entity\Manager\ArticleManager
                 arguments: ['@article_repository', '@category_manager']
+
+     video_manager:
+                     class: AppBundle\Entity\Manager\VideoManager
+                     arguments: ['@video_repository', '@category_manager']
 
      department_manager:
                  class: AppBundle\Entity\Manager\DepartmentManager

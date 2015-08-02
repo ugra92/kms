@@ -13,7 +13,7 @@ class ArticleType extends AbstractType
             ->add('heading', 'text', array('attr'=>array('class'=>'form-control')))
             ->add('content', 'textarea', array('attr'=>array('class'=>'form-control textarea-reset jqtext', 'rows'=>'20')))
             ->add('tags', 'text', array('attr'=>array('class'=>'form-control', 'placeholder'=>'Comma separated values')))
-            ->add('privacy', 'choice', array('choices'=> array('public' => 'Public', 'internal' => 'Internal'),'attr'=>array('class'=>'form-control')))
+            ->add('privacy', 'choice', array('choices'=> array('public' => 'Public', 'internal' => 'Internal'),'attr'=>array('class'=>'')))
             ->add('Add Article', 'submit', array('attr'=>array('class'=>'btn btn-success')));
     }
 

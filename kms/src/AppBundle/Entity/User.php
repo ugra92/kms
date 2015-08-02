@@ -56,6 +56,11 @@ class User extends BaseUser{
     protected $articles;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Video", mappedBy="userId")
+     */
+    protected $videos;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\CodeSnippet", mappedBy="userId")
      */
     protected $codeSnippets;
@@ -87,6 +92,7 @@ class User extends BaseUser{
         $this->comments= new ArrayCollection();
         $this->documents= new ArrayCollection();
         $this->articles= new ArrayCollection();
+        $this->videos= new ArrayCollection();
         $this->tasks= new ArrayCollection();
         $this->codeSnippets= new ArrayCollection();
     }
@@ -230,6 +236,24 @@ class User extends BaseUser{
         $this->name = $name;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getVideos()
+    {
+        return $this->videos;
+    }
+
+    /**
+     * @param mixed $videos
+     */
+    public function setVideos($videos)
+    {
+        $this->videos = $videos;
+    }
+
+
+
     public function addSnippet(CodeSnippet $codeSnippet)
     {
         $codeSnippet->setUserId($this);
@@ -276,6 +300,28 @@ class User extends BaseUser{
     {
         $this->articles->removeElement($article);
     }
+
+
+    /**
+     * @param Video $video
+     * @return $this
+     */
+    public function addVideo(Video $video)
+    {
+        $video->setUserId($this);
+        $this->articles[] = $video;
+        return $this;
+    }
+
+    /**
+     * @param Video $video
+     */
+    public function removeVideo(Video $video)
+    {
+        $this->videos->removeElement($video);
+    }
+
+
 
     /**
      * Add document

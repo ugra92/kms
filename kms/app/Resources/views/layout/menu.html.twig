@@ -4,7 +4,7 @@
     </div>
 
     <!--logo start-->
-    <a href="index.html" class="logo">UL <span class="lite">KMS</span></a>
+    <a href="{{ path('homepage') }}" class="logo"><img src="{{ asset('Base/img/logox64.png') }}" alt=""/></a>
     <!--logo end-->
 
     <div class="nav search-row" id="top_menu">
@@ -235,12 +235,24 @@
                 <a href="#" class="menu-item">
                     <i class="fa fa-file-text-o"></i>
                     <span>Articles</span>
-                    <span class="fa fa-chevron-down"></span>
+                    <span class="caret"></span>
                 </a>
                 <ul class="sub">
                     <li><a class="" href="{{ path('article-main') }}"><i class="fa fa-eye"></i>View All</a></li>
                     <li><a class="" href="{{ path('article-add') }}"><span><i class="fa fa-plus"></i>Add new</span></a></li>
                     <li><a class="" href="{{ path('article-edit') }}"><i class="fa fa-pencil"></i>Edit</a></li>
+                </ul>
+            </li>
+            <li class="sub-menu">
+                <a href="#" class="menu-item">
+                    <i class="fa fa-video-camera"></i>
+                    <span>Video</span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="sub">
+                    <li><a class="" href="{{ path('video-main') }}"><i class="fa fa-eye"></i>View All</a></li>
+                    <li><a class="" href="{{ path('video-add') }}"><span><i class="fa fa-plus"></i>Add new</span></a></li>
+                    <li><a class="" href="#"><i class="fa fa-pencil"></i>Edit</a></li>
                 </ul>
             </li>
             <li>
@@ -259,9 +271,10 @@
                 <a class="menu-item"href="#">
                     <i class="fa fa-code"></i>
                    <span>Code Post</span>
-                    <span class="fa fa-chevron-down"></span>
+                    <span class="caret"></span>
                 </a>
                 <ul class="sub">
+                    <li><a class="" href="{{ path('json-code-all') }}"><i class="fa fa-eye"></i>All </a></li>
                     <li><a class="" href="{{ path('code_add') }}"><i class="fa fa-plus"></i>Add new</a></li>
                 </ul>
             </li>
