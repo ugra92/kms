@@ -1197,12 +1197,40 @@ div[data-role="editor-toolbar"] {
     margin: 10px;
 }
 
+.task-card-title{
+    color:#fff;
+    font-weight: 300;
+}
+
+.task-card-article-heading a{
+    color:#3A4450;
+
+}
+
+.task-card-article-heading {
+    text-transform: uppercase;
+    color:#3A4450;
+}
+
+.cyan {
+    background-color: #E6616B !important;
+}
+.articles-colapsible{
+    border: none;
+    margin: 0;
+}
+
+.articles-colapsible .date{
+    font-size: 12;
+    color: #E6616B;
+}
+
 .wminimize, .wminimize:hover, .wminimize:focus, .wminimize:active{
-   color:#fff ;
+    color:#fff ;
 }
 
 .wclose, .wclose:hover, .wclose:focus, .wclose:active{
-   color:#fff ;
+    color:#fff ;
 }
 
 .panel .panel-body {
@@ -2288,6 +2316,17 @@ ul.ft-link li a i {
     width: 100%;
     height: auto;
 }
+
+.slider .slides{
+    background-color: transparent;
+}
+.slider .youtube{
+    height: 250px;
+}
+.slider .indicators .indicator-item.active{
+    background-color: #E6616B;
+}
+
 
 .owl-buttons {
     position: absolute;

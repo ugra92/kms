@@ -13,6 +13,16 @@ class ArticleRepository extends EntityRepository
 
     }
 
+    public function findArticlesLimited($limit){
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+        $qb->select('a')
+            ->from('AppBundle:Article', 'a')
+            ->orderBy('a.createdAt', 'DESC')
+            ->setMaxResults($limit);
+        return $qb->getQuery()->getResult();
+    }
+
     public function getUserArticles($id){
         return $this->findByUserId($id);
     }
