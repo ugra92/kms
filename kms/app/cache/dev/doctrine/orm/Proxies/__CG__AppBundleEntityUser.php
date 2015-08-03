@@ -64,10 +64,10 @@ class User extends \AppBundle\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'name', 'departmentId', 'articles', 'codeSnippets', 'documents', 'comments', 'position', 'tasks', 'username', 'usernameCanonical', 'email', 'emailCanonical', 'enabled', 'salt', 'password', 'plainPassword', 'lastLogin', 'confirmationToken', 'passwordRequestedAt', 'groups', 'locked', 'expired', 'expiresAt', 'roles', 'credentialsExpired', 'credentialsExpireAt');
+            return array('__isInitialized__', 'id', 'name', 'departmentId', 'articles', 'videos', 'codeSnippets', 'documents', 'comments', 'position', 'tasks', 'username', 'usernameCanonical', 'email', 'emailCanonical', 'enabled', 'salt', 'password', 'plainPassword', 'lastLogin', 'confirmationToken', 'passwordRequestedAt', 'groups', 'locked', 'expired', 'expiresAt', 'roles', 'credentialsExpired', 'credentialsExpireAt');
         }
 
-        return array('__isInitialized__', 'id', 'name', 'departmentId', 'articles', 'codeSnippets', 'documents', 'comments', 'position', 'tasks', 'username', 'usernameCanonical', 'email', 'emailCanonical', 'enabled', 'salt', 'password', 'plainPassword', 'lastLogin', 'confirmationToken', 'passwordRequestedAt', 'groups', 'locked', 'expired', 'expiresAt', 'roles', 'credentialsExpired', 'credentialsExpireAt');
+        return array('__isInitialized__', 'id', 'name', 'departmentId', 'articles', 'videos', 'codeSnippets', 'documents', 'comments', 'position', 'tasks', 'username', 'usernameCanonical', 'email', 'emailCanonical', 'enabled', 'salt', 'password', 'plainPassword', 'lastLogin', 'confirmationToken', 'passwordRequestedAt', 'groups', 'locked', 'expired', 'expiresAt', 'roles', 'credentialsExpired', 'credentialsExpireAt');
     }
 
     /**
@@ -367,6 +367,28 @@ class User extends \AppBundle\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getVideos()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getVideos', array());
+
+        return parent::getVideos();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setVideos($videos)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setVideos', array($videos));
+
+        return parent::setVideos($videos);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function addSnippet(\AppBundle\Entity\CodeSnippet $codeSnippet)
     {
 
@@ -417,6 +439,28 @@ class User extends \AppBundle\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeArticle', array($article));
 
         return parent::removeArticle($article);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addVideo(\AppBundle\Entity\Video $video)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addVideo', array($video));
+
+        return parent::addVideo($video);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function removeVideo(\AppBundle\Entity\Video $video)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'removeVideo', array($video));
+
+        return parent::removeVideo($video);
     }
 
     /**

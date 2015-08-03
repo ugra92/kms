@@ -270,31 +270,39 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
         }
 
-        if (0 === strpos($pathinfo, '/admin')) {
-            if (0 === strpos($pathinfo, '/admin/department')) {
-                // department-main
-                if ($pathinfo === '/admin/department') {
-                    return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::indexAction',  '_route' => 'department-main',);
-                }
-
-                // department-add
-                if ($pathinfo === '/admin/department/new') {
-                    if ($this->context->getMethod() != 'POST') {
-                        $allow[] = 'POST';
-                        goto not_departmentadd;
-                    }
-
-                    return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::departmentAddNewAction',  '_route' => 'department-add',);
-                }
-                not_departmentadd:
-
+        if (0 === strpos($pathinfo, '/admin/department')) {
+            // department-main
+            if ($pathinfo === '/admin/department') {
+                return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::indexAction',  '_route' => 'department-main',);
             }
 
-            // tasks_main
-            if ($pathinfo === '/admin/tasks') {
-                return array (  '_controller' => 'AppBundle\\Controller\\TaskController::indexAction',  '_route' => 'tasks_main',);
+            // department-add
+            if ($pathinfo === '/admin/department/new') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_departmentadd;
+                }
+
+                return array (  '_controller' => 'AppBundle\\Controller\\DepartmentController::departmentAddNewAction',  '_route' => 'department-add',);
+            }
+            not_departmentadd:
+
+        }
+
+        // posts-main
+        if ($pathinfo === '/posts') {
+            if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                $allow = array_merge($allow, array('GET', 'HEAD'));
+                goto not_postsmain;
             }
 
+            return array (  '_controller' => 'AppBundle\\Controller\\PostController::indexAction',  '_route' => 'posts-main',);
+        }
+        not_postsmain:
+
+        // tasks_main
+        if ($pathinfo === '/admin/tasks') {
+            return array (  '_controller' => 'AppBundle\\Controller\\TaskController::indexAction',  '_route' => 'tasks_main',);
         }
 
         if (0 === strpos($pathinfo, '/json/admin/tasks')) {
@@ -336,6 +344,45 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'AppBundle\\Controller\\UserController::profileAction',  '_route' => 'profile',);
         }
         not_profile:
+
+        if (0 === strpos($pathinfo, '/video')) {
+            // video-main
+            if ($pathinfo === '/videos') {
+                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                    $allow = array_merge($allow, array('GET', 'HEAD'));
+                    goto not_videomain;
+                }
+
+                return array (  '_controller' => 'AppBundle\\Controller\\VideoController::indexAction',  '_route' => 'video-main',);
+            }
+            not_videomain:
+
+            if (0 === strpos($pathinfo, '/video/add')) {
+                // video-add
+                if ($pathinfo === '/video/add') {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_videoadd;
+                    }
+
+                    return array (  '_controller' => 'AppBundle\\Controller\\VideoController::addNewAction',  '_route' => 'video-add',);
+                }
+                not_videoadd:
+
+                // video-add-ajax
+                if ($pathinfo === '/video/add') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_videoaddajax;
+                    }
+
+                    return array (  '_controller' => 'AppBundle\\Controller\\VideoController::addNewAjaxAction',  '_route' => 'video-add-ajax',);
+                }
+                not_videoaddajax:
+
+            }
+
+        }
 
         if (0 === strpos($pathinfo, '/log')) {
             if (0 === strpos($pathinfo, '/login')) {
