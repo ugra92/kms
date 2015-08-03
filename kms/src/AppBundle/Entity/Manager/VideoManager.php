@@ -16,6 +16,9 @@ class VideoManager {
 
     }
 
+    public function findVideosLimited($limit){
+        return $this->repository->findVideosLimited($limit);
+    }
     public function saveVideo(Video $video, $categoryId){
         $category= $this->categoryManager->getCategoryById($categoryId);
         $video->setCategoryId($category);

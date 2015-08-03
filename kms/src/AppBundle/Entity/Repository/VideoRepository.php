@@ -12,6 +12,16 @@ class VideoRepository extends EntityRepository
 
     }
 
+    public function findVideosLimited($limit){
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+        $qb->select('v')
+            ->from('AppBundle:Video', 'v')
+            ->orderBy('v.createdAt', 'DESC')
+            ->setMaxResults($limit);
+        return $qb->getQuery()->getResult();
+    }
+
     public function saveVideo(Video $video){
         $this->_em->persist($video);
         $this->_em->flush();

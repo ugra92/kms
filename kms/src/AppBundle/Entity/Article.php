@@ -52,6 +52,12 @@ class Article{
      */
     protected $userId;
 
+//    /**
+//     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Post", inversedBy="articles")
+//     * @ORM\JoinColumn(name="post_id", referencedColumnName="postId")
+//     */
+//    protected $postId;
+
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Category", inversedBy="articles")
      * @ORM\JoinColumn(name="category_id", referencedColumnName="categoryId")
