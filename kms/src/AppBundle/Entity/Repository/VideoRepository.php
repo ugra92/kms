@@ -12,6 +12,13 @@ class VideoRepository extends EntityRepository
 
     }
 
+    public function findAllNoRelation(){
+        $qb =$this->createQueryBuilder('v');
+        $qb->select('v.videoId', 'v.heading', 'v.description', 'v.link', 'v.createdAt', 'v.tags')
+            ->orderBy('v.createdAt', 'DESC');
+        return $qb->getQuery()->getResult();
+    }
+
     public function findVideosLimited($limit){
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
