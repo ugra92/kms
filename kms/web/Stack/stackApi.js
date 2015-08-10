@@ -21,7 +21,6 @@ function renderResponseCard(questions){
 }
 
 
-
 var avgRating = 0;
 var ratingCounter = 0;
 var ratingTotal = 0;
@@ -95,10 +94,12 @@ function renderResponseList(questions){
 
     }
     var ctx = document.getElementById("grafik").getContext("2d");
-    console.log(ctx);
-    window.myBar = new Chart(ctx).Bar(barChartData, {
+    var myBar = new Chart(ctx).Bar(barChartData, {
         responsive : true
     });
+
+    console.log(myBar);
+
 }
 
 var words = [];

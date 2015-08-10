@@ -21,6 +21,10 @@ class ArticleManager {
 
     }
 
+    public function findArticlesByUserLimited($id, $limit){
+       return  $this->repository->findArticlesByUserLimited($id, $limit);
+    }
+
     public function findArticlesLimited($limit){
         return $this->repository->findArticlesLimited($limit);
     }

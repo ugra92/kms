@@ -42,4 +42,17 @@ class ArticleRepository extends EntityRepository
     public function getArticle($id){
         return $this->findByArticleId($id);
     }
+
+
+    public function findArticlesByUserLimited($id, $limit){
+        $em = $this->getEntityManager();
+        $qb = $em->createQueryBuilder();
+        $qb->select('a')
+            ->from('AppBundle:Article', 'a')
+            ->where('a.userId = ?1')
+            ->orderBy('a.createdAt', 'DESC')
+            ->setParameter('1', $id)
+            ->setMaxResults($limit);
+        return $qb->getQuery()->getResult();
+    }
 }

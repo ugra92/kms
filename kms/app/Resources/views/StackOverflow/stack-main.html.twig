@@ -77,9 +77,9 @@
 {% endblock %}
 
 {% block customScripts %}
-    <script src="{{ asset('Stack/stackApi.js') }}"></script>
     <script src="{{ asset('Dashboard/js/Chart.min.js') }}"></script>
     <script src="{{ asset('Dashboard/js/Chart.Bar.js') }}"></script>
+    <script src="{{ asset('Stack/stackApi.js') }}"></script>
     <script>
         $('.stackReq').on('click',function(){
             var searchStr = $('#searchStack').val();

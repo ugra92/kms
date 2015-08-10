@@ -23,7 +23,7 @@
             </div>
             <div class="form-group col-md-4 col-md-offset-1">
                 <div class="row">
-                    <input type="text" class="form-control" placeholder="Code tags..." id="codeTags"/>
+                    <input type="text" class="form-control" placeholder="Code tags..." id="codeTags" name="codeTags"/>
                 </div>
             </div>
         </div>
@@ -178,7 +178,8 @@
             var cssCode = css.getSession().getValue();
             var jsCode = js.getSession().getValue();
             var heading = $('#codeHeading').val();
-            $.post("{{ path('json-code-add') }}", {htmlCode:htmlCode, cssCode:cssCode, jsCode:jsCode, heading:heading}, function(data){
+            var tags = $('#codeTags').val();
+            $.post("{{ path('json-code-add') }}", {htmlCode:htmlCode, cssCode:cssCode, jsCode:jsCode, heading:heading, tags: tags}, function(data){
                 console.log(css.getSession().getValue());
 //                console.log(data);
             });

@@ -88,7 +88,11 @@
                                     <li class="by-me">
                                         <!-- Use the class "pull-left" in avatar -->
                                         <div class="avatar pull-left">
-                                            <img src="http://www.thebalsagroup.org/wp-content/uploads/2014/10/business-man.png" alt="">
+                                            {% if app.user.profileImg is not null %}
+                                                <img alt="" src="{{ comment.userId.profileImg.getWebPath }}" alt="avatar">
+                                            {% else  %}
+                                                <img src="http://eventraveler.com/images/avatar.png" alt="avatar"/>
+                                            {% endif %}
                                         </div>
                                         <div class="chat-content">
                                             <!-- In meta area, first include "name" and then "time" -->
@@ -102,7 +106,11 @@
                                     <li class="by-other">
                                         <!-- Use the class "pull-right" in avatar -->
                                         <div class="avatar pull-right">
-                                            <img src="http://www.thebalsagroup.org/wp-content/uploads/2014/10/business-man.png" alt="">
+                                            {% if comment.userId.profileImg is not null %}
+                                                <img alt="" src="{{ comment.userId.profileImg.getWebPath }}" alt="avatar">
+                                            {% else  %}
+                                                <img src="http://eventraveler.com/images/avatar.png" alt="avatar"/>
+                                            {% endif %}
                                         </div>
                                         <div class="chat-content">
                                             <!-- In the chat meta, first include "time" then "name" -->

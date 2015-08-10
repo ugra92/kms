@@ -173,7 +173,11 @@
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="profile-ava">
-                                <img alt="" src="http://www.thebalsagroup.org/wp-content/uploads/2014/10/Five-Promotional-Items-For-the-Savvy-Businessman.png">
+                                {% if app.user.profileImg is not null %}
+                                <img alt="" src="{{ app.user.profileImg.getWebPath }}" alt="avatar">
+                                {% else  %}
+                                    <img src="http://eventraveler.com/images/avatar.png" alt="avatar"/>
+                                {% endif %}
                             </span>
                     <span class="username">{{ app.user.name }}</span>
                     <b class="caret"></b>

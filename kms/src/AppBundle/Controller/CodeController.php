@@ -44,13 +44,15 @@ class CodeController extends Controller
     public function jsonCodeAddAction(Request $request)
     {
         $code= new CodeSnippet();
+//        var_dump($request->request);
+//        exit;
         $code->setUserId($this->getUser());
         $code->setHtml($request->request->get('htmlCode'));
         $code->setCss($request->request->get('cssCode'));
         $code->setJs($request->request->get('jsCode'));
         $code->setHeading($request->request->get('heading'));
-
-        return  $this->get('code_manager')->saveCode($code);
+        $code->setTags($request->request->get('tags'));
+        $this->get('code_manager')->saveCode($code);
     }
 
     /**

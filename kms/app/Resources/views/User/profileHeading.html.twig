@@ -4,8 +4,19 @@
             <div class="col-lg-2 col-sm-2">
                 <h4>{{ user.name }}</h4>
                 <div class="follow-ava">
-                    <img src="http://www.thebalsagroup.org/wp-content/uploads/2014/10/Five-Promotional-Items-For-the-Savvy-Businessman.png" alt="">
+                    {% if app.user.profileImg is not null %}
+                        <img alt="" src="{{ user.profileImg.getWebPath }}" alt="avatar">
+                    {% else  %}
+                        <img src="http://eventraveler.com/images/avatar.png" alt="avatar"/>
+                    {% endif %}
                 </div>
+                <form action="{{ path('profile_photo_upload') }}" enctype="multipart/form-data" method="post" id="profileImgUpload">
+                    <span class="btn btn-success btn-file">
+                        Upload photo
+                    <input type="file" name="image" id="image"/>
+                        </span>
+                    <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i></button>
+                </form>
                 <h6>{{ user.position }}</h6>
             </div>
             <div class="col-lg-4 col-sm-4 follow-info">

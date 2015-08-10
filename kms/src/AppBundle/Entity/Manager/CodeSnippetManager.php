@@ -9,6 +9,10 @@ class CodeSnippetManager {
 
      protected $repository;
 
+    public function findSnippetsByUserLimited($id, $limit){
+        return $this->repository->findSnippetsByUserLimited($id, $limit);
+    }
+
     public function __construct(CodeSnippetRepository $repository){
         $this->repository= $repository;
     }

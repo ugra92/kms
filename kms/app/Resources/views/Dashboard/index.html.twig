@@ -74,32 +74,42 @@
                     </ul>
                 </section>
             </div>
+            <div class="col-md-6 text-center">
+                <h5 class="page-header">Article tags statistics</h5>
+                <canvas id="radar" height="210">
+                </canvas>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-6">
+                <h5 class="page-header">Recent videos</h5>
                 <section id="videos">
                     <div class="slider">
                         <ul class="slides">
                             {% for video in videos %}
                                 <li>
-                                    <div class="col-md-12">
-                                        <div class="card card-video-holder">
-                                            <div class="card-image waves-effect waves-block waves-light">
-                                                <div class="youtube" id="{{ video.link[30:] }}">
-                                                    {#<img src="http://img.youtube.com/vi{{ video.link[29:] }}/0.jpg" alt=""/>#}
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="card card-video-holder">
+                                                <div class="card-image waves-effect waves-block waves-light">
+                                                    <div class="youtube" id="{{ video.link[30:] }}">
+                                                        {#<img src="http://img.youtube.com/vi{{ video.link[29:] }}/0.jpg" alt=""/>#}
+                                                    </div>
+                                                    {#<iframe   src="{{ video.link }}?showinfo=0&rel=0&theme=light" frameborder="0" allowfullscreen></iframe>#}
                                                 </div>
-                                                {#<iframe   src="{{ video.link }}?showinfo=0&rel=0&theme=light" frameborder="0" allowfullscreen></iframe>#}
-                                            </div>
-                                            <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4 card-heading">{{ video.heading }}
-                            <button class="btn-floating btn-large waves-effect waves-light right"><i class="fa fa-ellipsis-v right"></i></button></span>
-                                                <p><a href="{{ video.link|replace({'/embed/':'/watch/'}) }}">{{ video.link|replace({'/embed/':'/watch/'})  }}</a></p>
-                                                <span class="date right">{{ video.createdAt | date("F d, Y")  }}</span>
-                                            </div>
-                                            <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">{{ video.heading }}
-                            <i class="fa fa-times right"></i></span>
-                                                <p>{{ video.description }}</p>
-                                                <hr/>
-                                                <span><b>tags:</b>{{ video.tags }}</span>
+                                                <div class="card-content">
+                                                <span class="card-title activator grey-text text-darken-4 card-heading">{{ video.heading }}
+                                                    <button class="btn-floating btn-large waves-effect waves-light right"><i class="fa fa-ellipsis-v right"></i></button></span>
+                                                    <p><a href="{{ video.link|replace({'/embed/':'/watch/'}) }}">{{ video.link|replace({'/embed/':'/watch/'})  }}</a></p>
+                                                    <span class="date right">{{ video.createdAt | date("F d, Y")  }}</span>
+                                                </div>
+                                                <div class="card-reveal">
+                                                <span class="card-title grey-text text-darken-4">{{ video.heading }}
+                                                    <i class="fa fa-times right"></i></span>
+                                                    <p>{{ video.description }}</p>
+                                                    <hr/>
+                                                    <span><b>tags:</b>{{ video.tags }}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -116,8 +126,10 @@
 {% block customScripts %}
     <script src="{{ asset('Dashboard/js/posts.js') }}"></script>
     <script src="{{ asset('Dashboard/js/Chart.min.js') }}"></script>
-    <script src="{{ asset('Dashboard/js/Chart.Line.js') }}"></script>
+    <script src="{{ asset('Dashboard/js/Chart.PolarArea.js') }}"></script>
+    <script src="{{ asset('Base/js/prepareForGraphic.js') }}"></script>
     <script src="{{ asset('Video/youtube.js') }}"></script>
+
     <script>
         $(document).ready(function(){
             $('.slider').slider({
@@ -134,7 +146,32 @@
                     scrollTop: $("#videos").offset().top
                 });
             });
+
+            var articleTags = [];
+
+            {% for article in articles  %}
+            var tags = "{{ article.tags }}";
+            tags = tags.split(',');
+            articleTags = articleTags.concat(tags);
+            {% endfor %}
+            var colors  = ['#3A4450', '#E6616B', '#2BBBAD', '#6bbef6'];
+            analize(articleTags);
+
+            var dataForRadar = [];
+            for(var i = 0; i<tagsNum.length; i++){
+                dataForRadar.push({
+                    value: tagsNum[i],
+                    color:colors[Math.floor(Math.random() * colors.length)],
+                    highlight: "#FF5A5E",
+                    label: tagWords[i]
+                })
+            }
+
+            console.log(dataForRadar);
+            var ctx = document.getElementById("radar").getContext("2d");
+            new Chart(ctx).PolarArea(dataForRadar);
         });
     </script>
+
 {% endblock %}
 

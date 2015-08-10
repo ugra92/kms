@@ -5,8 +5,10 @@ use AppBundle\Entity\CodeSnippet;
 use AppBundle\Entity\Task;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\OneToOne;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
@@ -20,26 +22,7 @@ class User extends BaseUser{
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-//    /**
-//     * @ORM\Column(type="string")
-//     */
-//    protected $name;
-//    /**
-//     * @ORM\Column(type="string")
-//     */
-//    protected $username;
-//    /**
-//     * @ORM\Column(type="string")
-//     */
-//    protected $password;
-//    /**
-//     * @ORM\Column(type="string")
-//     */
-//    protected $email;
-//    /**
-//     * @ORM\Column(type="string")
-//     */
-//    protected $role;
+
     /**
      * @ORM\Column(type="string")
      */
@@ -79,6 +62,11 @@ class User extends BaseUser{
      * @ORM\Column(type="string", nullable=true)
      */
     protected $position;
+
+    /**
+     * @OneToOne(targetEntity="Document")
+     **/
+    protected $profileImg;
 
     /**
      * @ManyToMany(targetEntity="Task", inversedBy="users")
@@ -252,6 +240,21 @@ class User extends BaseUser{
         $this->videos = $videos;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getProfileImg()
+    {
+        return $this->profileImg;
+    }
+
+    /**
+     * @param mixed $profileImg
+     */
+    public function setProfileImg($profileImg)
+    {
+        $this->profileImg = $profileImg;
+    }
 
 
     public function addSnippet(CodeSnippet $codeSnippet)
